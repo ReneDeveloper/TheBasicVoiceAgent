@@ -5,11 +5,13 @@ class AsistenteGlpi(BasicVoiceBot):
 		BasicVoiceBot.__init__(self, name_, file_tag)
 
 	def procesa_msg(self,aaa,bbb):
-		self.log('procesa_post_msg')
+		self.log(f'aaa:{aaa}')
+		self.log(f'bbb:{bbb}')
+
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 #asistenteBot.vozTesting_DISPONIBLES()
-asistenteBot.vozChange('MSTTS_V110_esMX_RaulMM')
+#asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.setUtilComando_SRC('commands/COMMAND_DEF_GLPI.json')
 asistenteBot.load()
 asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")

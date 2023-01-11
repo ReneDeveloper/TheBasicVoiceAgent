@@ -1,10 +1,12 @@
 {
 "key_basic_saludo": ["hola","como estas"],
+"key_basic_setnombre": ["me llamo","mi nombre es","me dicen","el cura me puso"],
+
 "key_chiste": ["chiste","chistes","talla","broma"],
 "key_chiste_ciegos": ["cieguitos","ciegos","no videntes"],
 
 "key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
-"key_basic_setnombre": ["me llamo","mi nombre es","me dicen","el cura me puso"],
+
 "key_basic_getnombre": ["cual es tu nombre","como te llamas","como te dicen","como te llaman"],
 "par_basic_nombre": ["apodo:y como te dicen|y cual es tu apodo","apellido:y cual es tu apellido","email:cual es tu correo electrónico"],
 

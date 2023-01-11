@@ -16,16 +16,19 @@ class UtilCommand:
 #    def __init__(self,mapa_base):
 
     def __init__(self, src_comandos):
+        """function """
         print("FLUJO:UtilCommand:__init__:src_Comandos" + src_comandos)
         self.log("FLUJO:UtilCommand:__init__")
         self.__src_comandos = src_comandos
         self.carga_comandos(src_comandos)
 
     def log(self,msg_):
+        """function """
         if self.__LOG_ACTIVO:
             print("LOG:UtilCommand:" + msg_)
 
     def batch(self,src_,__MAPA_BASE):
+        """function """
         batch_out = ""
         self.log(  "Entrando a modo batch:  "   )
         
@@ -55,6 +58,7 @@ class UtilCommand:
         return batch_out
 
     def getMapaComando(self,txt_entrada):
+        """function """
         #print("getMapaComando:" + "status de [self.__COMANDOS]:" + str(self.__COMANDOS) )
         #if (self.__COMANDOS==None):
         #    print("getMapaComando:status: self.__src_Comandos: " + str(self.__src_Comandos) )
@@ -97,6 +101,7 @@ class UtilCommand:
         return salida_DICT
 
     def txt_open_FIX_RAW(self,scr_):
+        """function """
         f=open(scr_,'r',errors = 'ignore')
         raw=f.read()
         raw=raw.lower()# converts to lowercase
@@ -105,6 +110,7 @@ class UtilCommand:
         return raw_fix
 
     def carga_comandos(self,src_comandos):
+        """function """
         print("cargaComandos:" + str(src_comandos) )
         salida_ = ""
 
@@ -120,6 +126,7 @@ class UtilCommand:
         return salida_
 
     def string_remove_stop_words(self,val):
+        """function """
         valClean = ""
         #val = 'El problema del matrimonio es que se acaba todas las noches despues de hacer el amor, y hay que volver a reconstruirlo todas las mananas antes del desayuno.'
 

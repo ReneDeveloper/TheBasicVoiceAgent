@@ -1,10 +1,11 @@
 """class_basic_voice_bot.py"""
+import random
 import nltk #RSILVA_20200305 NATURAL LANGUAGE TOOL KIT
 import speech_recognition as sr #RSILVA_20200305 RECONOCIMIENTO DE VOZ ENTRADA
 import pyttsx3 #RSILVA_20200305 PYTHON SPEECH TEXT TO SPEECH
 
 import requests
-import random
+
 from class_util_string import UtilString 
 #from BASIC_BOT_TRADUCE_PERIODOS_20200210 import BasicTraductor_PERIODOS 
 
@@ -19,7 +20,7 @@ class BasicVoiceBot:
     __hablar            = True
     __humanBatchVoice   = True
     __nombre_conocido   = ''
-    __maxspeed          = 0
+    #__maxspeed          = 0
     __log               = True
 
     __traductor_001       = None
@@ -35,13 +36,16 @@ class BasicVoiceBot:
     _POSIBLE_INSULTO_3 = ("estúpido", "pajaron", "malulo", "que roteque")
 
     __util_String = None
-    util_Command = None
+    #util_Command = None
     #__util_Command_SRC = None
 
     engine = None
     engine_batch = None
 
     __map_COMANDOS = None
+
+    voice_engine = 'TTS_MS_ES-ES_HELENA_11.0'  #'MSTTS_V110_esES_PabloM' 'MSTTS_V110_esMX_RaulMM'
+    voice_engine_batch = 'MSTTS_V110_esES_PabloM' #'TTS_MS_ES-ES_HELENA_11.0' 
 
     def __init__(self,name_, file_tag):
         """function ____"""
@@ -54,9 +58,13 @@ class BasicVoiceBot:
 
         self.__name = name_
 
-        self.engine_batch = pyttsx3.init()
-        #botConfig = ""
         self.engine = pyttsx3.init()
+        self.engine.setProperty('voice', self.voice_engine)
+
+        self.engine_batch = pyttsx3.init()
+        self.engine_batch.setProperty('voice', self.voice_engine_batch)
+        #botConfig = ""
+
 
 
     def log(self,txtLog):
@@ -66,46 +74,20 @@ class BasicVoiceBot:
 
     def saludo(self):
         """function ____"""
-        msgSaludo = random.choice(self._POSIBLE_SALUDO)
-        msgSaludo = msgSaludo + ', mi nombre es ' + self.__name + ': Pregúntame cosas.' 
-        msgSaludo = msgSaludo + '. Para salir, dime Bye!.'
+        msg_saludo = random.choice(self._POSIBLE_SALUDO)
+        msg_saludo = msg_saludo + ', mi nombre es ' + self.__name + ': Pregúntame cosas.'
+        msg_saludo = msg_saludo + '. Para salir, dime Bye!.'
 
         msg_saludo_contextos = 'Estoy programad' + self.__sex + ' para aprendizaje automático y manejo de contextos' #los siguientes contextos: " + str(POSIBLES_CONTEXTOS)
         #msg_saludo_contextos = "Si no entiendo " +   str(POSIBLES_NO_ENTIENDO) 
-        #print(msgSaludo)
-        self.log('saludo: ' + msgSaludo)
-        return msgSaludo
+        #print(msg_saludo)
+        self.log('saludo: ' + msg_saludo)
+        return msg_saludo
         
     def despedida(self):
         """function ____"""
-        msgSaludo = random.choice(self._POSIBLE_DESPEDIDA)
-        self.log('despedida: ' + msgSaludo)
-
-    def load(self):
-        self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
-        self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
-
-    #def txt_FIX_ISO(self,user_response):
-    #    robo_response=""+user_response
-    #    robo_response = robo_response.replace("\\xe2\\x80\\x9c", "\"")
-    #    robo_response = robo_response.replace("brasil ", "brazil ")
-    #    return robo_response
-
-    #def getUtilComando(self):
-
-        #self.log("getUtilComando-->self.__util_Command:" + self.__util_Command)
-        #self.log("getUtilComando-->self.__util_Command_SRC:" + self.__util_Command_SRC)
-        #self.log("getUtilComando-->self.__util_Command.__util_Command_SRC:" + self.__util_Command.__util_Command_SRC)
-
-        #if (self.__util_Command==None):
-        #    self.__util_Command = UtilCommand()
-        #    self.__util_Command.__util_Command_SRC = self.__util_Command_SRC
-        #    print("EMPEZANDO CARGA DE COMANDOS:" + self.__util_Command_SRC)
-        #    self.__util_Command.cargaComandos(self.__util_Command_SRC)
-
-        #self.log("getUtilComando:" + self.__util_Command.__util_Command_SRC)
-
-        #return self.__util_Command
+        msg_saludo = random.choice(self._POSIBLE_DESPEDIDA)
+        self.log('despedida: ' + msg_saludo)
 
     def setUtilComando_SRC(self,src_comandos):
         print("setUtilComando_SRC: " + src_comandos)
@@ -130,26 +112,32 @@ class BasicVoiceBot:
 #    XXXXXXXX  XX    XX    XX    XXXXXXXX XX    XX XX    XX   XXXXXX    XX   
 
     def interact(self,msg):
-
+        """function ____"""
         interact_out = "No te entiendo, me falta información"
-
-#        if (self.__util_Command==None):
-#            self.__util_Command = UtilCommand("COMMAND_DEF_20200210.txt")
         mapa_COMANDO = self.util_Command.getMapaComando(msg)
-
         comando="sin_comando"#ignorando 
 
         self.log("mapa_COMANDO:" + str(mapa_COMANDO)  ) 
 
         if (comando=="saluda"):
             msgSaludo = ""
-
             if (self.__nombre_conocido!=""):
                 msgSaludo = random.choice(self._POSIBLE_SALUDO) + " " + self.__nombre_conocido
             else:
                 msgSaludo = random.choice(self._POSIBLE_SALUDO) + ", no sé como te llamas, por favor dime tu nombre."
-
             interact_comando_out = msgSaludo
+
+
+        if ("key_basic_saludo" in mapa_COMANDO.keys()):
+            print("SETEANDO NOMBRE: " + msg)
+            msgSaludo = ""
+            if (self.__nombre_conocido!=""):
+                msgSaludo = random.choice(self._POSIBLE_SALUDO) + " " + self.__nombre_conocido
+            else:
+                msgSaludo = random.choice(self._POSIBLE_SALUDO) + ", no sé como te llamas, por favor dime tu nombre."
+            interact_out = msgSaludo
+
+
 
         if ("key_basic_setnombre" in mapa_COMANDO.keys()):
             print("SETEANDO NOMBRE: " + msg)
@@ -190,7 +178,6 @@ class BasicVoiceBot:
                 predicado = "tornillos roscalata"
                 busquedaLogistica = "quedan 5 cajas de " + predicado + " en el pasillo 1, columna 2, estante B"
                 interact_out = "producto encontrado: " + busquedaLogistica
-
 
         if ("key_basic_ayuda" in mapa_COMANDO.keys()):
             interact_out = "por supuesto que puedo ayudarte, conexión a E R P realizada con éxito"
@@ -236,7 +223,6 @@ class BasicVoiceBot:
 
             interact_comando_out = msgInsulto
 
-
         if (comando=="insultar2"):
             msgInsulto = ""
 
@@ -270,24 +256,28 @@ class BasicVoiceBot:
         return interact_out
 
     def response_FIX(self,user_response):
+        """function ____"""
         robo_response=self.util.string_FIX_000(user_response)
         return robo_response
 
     def learn(self,txtRaw):
+        """function ____"""
         cnt = len(txtRaw)
         self.log('learn: ' + str(cnt) + ' caracteres' )
-        sent_tokens = nltk.sent_tokenize(txtRaw)# converts to list of sentences 
+        sent_tokens = nltk.sent_tokenize(txtRaw)# converts to list of sentences
         self.log('learn: ' + str(len (sent_tokens)) + ' sentencias' )
         word_tokens = nltk.word_tokenize(txtRaw)# converts to list of words
         self.log('learn: ' + str(len (word_tokens)) + ' palabras' )
 
     def eatTxtFile(self,txtSrc):
+        """function ____"""
         f=open(txtSrc,'r',errors = 'ignore')
         txtRaw=f.read()
         txtRaw=txtRaw.lower()# minúsculas
         self.learn(txtRaw)
 
     def httpGet(self,url_):
+        """function ____"""
         salidaHTTP = ""
         headers_Get = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
@@ -305,10 +295,9 @@ class BasicVoiceBot:
 
 
 
-    def setDummy(self,dm):
-        self.__maxspeed = dm
 
     def audio_input(self):
+        """function ____"""
         robo_response_audio_TXTFIX=""
         r = sr.Recognizer()
         with sr.Microphone() as source:
@@ -339,9 +328,10 @@ class BasicVoiceBot:
         return robo_response_audio_TXTFIX
 
     def batch(self,src_):
+        """function ____"""
         batch_out = ""
-        self.engine.say("Entrando a modo batch: mi nombre es: " + self.__name)
-        self.engine.runAndWait()
+        self.engine_batch.say("Entrando a modo batch: mi nombre es: " + self.__name)
+        self.engine_batch.runAndWait()
         txtRaw = ""
         try:
             f=open(src_,'r',errors = 'ignore')
@@ -361,7 +351,7 @@ class BasicVoiceBot:
             print("------------------------------------------------------------------------------------------------------------------")
             #mensajeHumano = self.util.string_FIX_002(mensajeHumano)
             if (self.__humanBatchVoice):
-                self.vozChange('MSTTS_V110_esES_PabloM')
+                self.voz_change(self.voice_engine_batch) #'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('MSTTS_V110_esES_PabloM'))
 
                 self.engine_batch.say("" + str(mensajeHumano))
@@ -373,7 +363,7 @@ class BasicVoiceBot:
             print("------------------------------------------------------------------------------------------------------------------")
 
             if (self.__hablar):
-                self.vozChange('TTS_MS_ES-ES_HELENA_11.0')
+                self.voz_change(self.voice_engine ) #'TTS_MS_ES-ES_HELENA_11.0' 'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('TTS_MS_ES-ES_HELENA_11.0'))
                 self.engine.say("" + str(mensajeBot))
                 #engine.say("paso 2")
@@ -398,15 +388,18 @@ class BasicVoiceBot:
             #engine.stop()
 
     def vozId_minimo(self,id_completo):
+        """function ____"""
         id_=""+id_completo
         id_ = id_.replace("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\", "")
         return id_
 
     def vozId_completo(self,id_voz):
+        """function ____"""
         id_ = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz 
         return id_
 
-    def vozChange(self,id_):
+    def voz_change(self,id_):
+        """function ____"""
         id_completo = self.vozId_completo(id_)
         #print("setVoz(id_=" + id_ + ")-->" + "FORMATO:'"  + id_completo + "'" )
         self.engine.setProperty('voice', id_completo)
@@ -416,6 +409,7 @@ class BasicVoiceBot:
 
 
     def interact_sesion_preguntas(self,comando):
+        """function ____"""
         interact_sesion_preguntas_out = "No sé ejecutar el comando '" + comando 
         #if (__log):print(__name + '-->' + 'interact: ' + str(self.__maxspeed))
 
@@ -455,24 +449,17 @@ class BasicVoiceBot:
 
         return interact_sesion_preguntas_out
 
+class AsistenteGlpi(BasicVoiceBot):
+    def __init__(self,name_,file_tag):
+        BasicVoiceBot.__init__(self, name_, file_tag)
 
-#txtBOT = BasicVoiceBot("Sócrates")
+    def procesa_msg(self,aaa,bbb):
+        self.log(f'aaa:{aaa}')
+        self.log(f'bbb:{bbb}')
+        self.log('procesa_post_msg')
 
-#txtBOT.load()
-
-#txtBOT.vozTesting_DISPONIBLES()
-
-#txtBOT.interact("hola")
-
-#txtBOT.testVoz()
-
-#txtBOT.interact_sesion_preguntas("hola")
-
-#txtBOT.batch("BATCH_FLOW_PARIS_20191226_RESUMIDO.txt")
-
-#txtBOT.batch("BATCH_FLOW_ENJOY_20191226_RESUMIDO.txt")
-
-#txtBOT.batch("BATCH_FLOW_LIBRO_LOCO_RENE_20200122.txt")
-
-
-
+asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
+#asistenteBot.vozTesting_DISPONIBLES()
+#asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
+#asistenteBot.setUtilComando_SRC('commands/COMMAND_DEF_GLPI.json')
+asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
