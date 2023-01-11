@@ -9,6 +9,9 @@ Goals:
 ---------------------------------------------------------------------------
 Example of use:
 ---------------------------------------------------------------------------
+
+
+
 from class_basic_voice_bot import BasicVoiceBot
 
 class AsistenteGlpi(BasicVoiceBot):
@@ -24,4 +27,5 @@ asistenteBot.vozChange('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.setUtilComando_SRC('commands/COMMAND_DEF_GLPI.json')
 asistenteBot.load()
 asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
+
 ---------------------------------------------------------------------------
