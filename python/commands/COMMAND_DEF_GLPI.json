@@ -1,0 +1,28 @@
+{
+"key_basic_saludo": ["hola","como estas"],
+"key_chiste": ["chiste","chistes","talla","broma"],
+"key_chiste_ciegos": ["cieguitos","ciegos","no videntes"],
+
+"key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
+"key_basic_setnombre": ["me llamo","mi nombre es","me dicen","el cura me puso"],
+"key_basic_getnombre": ["cual es tu nombre","como te llamas","como te dicen","como te llaman"],
+"par_basic_nombre": ["apodo:y como te dicen|y cual es tu apodo","apellido:y cual es tu apellido","email:cual es tu correo electrónico"],
+
+
+
+"key_idea_insert": ["nueva idea","crear idea","tengo una idea"],
+"key_idea_select": ["busca idea","selecciona idea","seleccionar idea"],
+"key_idea_list": ["listar ideas","mostrar ideas","muestrame las ideas"],
+"key_idea_count": ["contar ideas","cuantas ideas"],
+
+"map_SUCURSALES_POSIBLES" : {"local lyon":1,"enjoy coquimbo":1,"coquimbo":1, "viña":2,"viña del mar":2, "enjoy viña":2,  "enjoy santiago":3 ,"enjoy de los andes":3,"enjoy chiloe":4,"paris alto las condes":502, "paris maipu":503,  "local 503":503 ,"local 502":502 },
+
+"key_proyecto_web": ["crear un proyecto web","crea proyecto web","inicia proyecto web","quiero un front"],
+
+"key_proyecto_backend": ["crear un proyecto backend","crea un proyecto backend"],
+
+"key_framework_angular": ["angular"],
+
+"key_logistica_busqueda": ["donde esta","cuanto queda","cual es la existencia","que cantidad hay","quedan"]
+
+}
