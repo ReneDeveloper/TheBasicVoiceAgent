@@ -8,26 +8,18 @@ from nltk.corpus import stopwords
 class UtilCommand:
 
     __LOG_ACTIVO = True
-    __src_Comandos = None
+    __src_comandos = None
     __COMANDOS = None
 
-
 #    _MAP_SUCURSALES_POSIBLES = {"local lyon":1,"enjoy coquimbo":1,"coquimbo":1, "viña":2,"viña del mar":2, "enjoy viña":2,  "enjoy santiago":3 ,"enjoy de los andes":3,"enjoy chiloe":4 }
-
 #    __MAPA_BASE = None
-
-
 #    def __init__(self,mapa_base):
 
-    def __init__(self, src_Comandos):
-        print("FLUJO:UtilCommand:__init__:src_Comandos" + src_Comandos)
+    def __init__(self, src_comandos):
+        print("FLUJO:UtilCommand:__init__:src_Comandos" + src_comandos)
         self.log("FLUJO:UtilCommand:__init__")
-        self.__src_Comandos = src_Comandos
-
-        #self.__url=""
-        #self.__MAPA_BASE=mapa_base
-        #self.__name = name_
-
+        self.__src_comandos = src_comandos
+        self.carga_comandos(src_comandos)
 
     def log(self,msg_):
         if self.__LOG_ACTIVO:
@@ -42,8 +34,6 @@ class UtilCommand:
             f=open(src_,'r',errors = 'ignore')
             txtRaw=f.read()
             txtRaw=txtRaw.lower()# minúsculas
-
-        
         finally:
             f.close()
 
@@ -51,7 +41,7 @@ class UtilCommand:
 
             if (mensajeHumano==""):continue
             if (mensajeHumano[0:1]=="#"):continue
-#            mensajeHumano = self.string_FIX_002(mensajeHumano)
+            #mensajeHumano = self.string_FIX_002(mensajeHumano)
             print("------------------------------------------------------------------------------------------------------------------")
             print("MENSAJE HUMANO:'" + mensajeHumano+"'")
             print("------------------------------------------------------------------------------------------------------------------")
@@ -61,11 +51,8 @@ class UtilCommand:
 
             print(  "MAPA_MENSAJE:" + str(mapaComando)  )
             print("------------------------------------------------------------------------------------------------------------------")
-            
-
 
         return batch_out
-
 
     def getMapaComando(self,txt_entrada):
         #print("getMapaComando:" + "status de [self.__COMANDOS]:" + str(self.__COMANDOS) )
@@ -83,14 +70,11 @@ class UtilCommand:
 
         txt_post = "" + txt
 
-        salida_DICT = {
-
-        }
+        salida_DICT = {}
+        salida_DICT["txt_entrada"]=txt_entrada
 
         #ITERAR LAS PALABRAS DE LA LISTA DE COMANDOS
-
         #GENERAR_BOOLEAN = SI EL TEXTO DEL ARREGLO DEL COMANDO, SE ENCUENTRA EN LA FRASE HUMANA
-
 
         for key_comando in self.__COMANDOS.keys():
             #print ("------------------------------------------")
@@ -103,18 +87,14 @@ class UtilCommand:
                 if tieneComando:
                     salida_DICT[ key_comando ] = tieneComando
 
-            if key_comando[0:4]=="par_":
+            #lo mismo para la key, pero parametros podría ser otro vector de salida
+            #configurable a partir de un segundo comando
+            if key_comando[0:4]=="par_": 
                 #print("es un parámetro para la key: " + key_comando)
                 a9999 = 0
                 #tieneComando = any(string in txt_entrada for string in str(self.__COMANDOS.get(key_comando)) )
-                
             #print ("------------------------------------------")
-
-
-
-
         return salida_DICT
-
 
     def txt_open_FIX_RAW(self,scr_):
         f=open(scr_,'r',errors = 'ignore')
@@ -124,19 +104,18 @@ class UtilCommand:
         raw_fix = self.string_FIX_002(raw_fix)
         return raw_fix
 
-    def cargaComandos(self,src):
-        print("cargaComandos:" + str(src) )
+    def carga_comandos(self,src_comandos):
+        print("cargaComandos:" + str(src_comandos) )
         salida_ = ""
 
-        archivoComandos = src
+        #archivoComandos = src
         
         if (self.__COMANDOS==None):
-            f = open(archivoComandos, 'r')
+            f = open(src_comandos, 'r')
             self.__COMANDOS = json.loads(f.read())
-            print("CARGANDO:archivoComandos:" + str(src) )
+            print("CARGANDO:archivoComandos:" + str(src_comandos) )
             print("CARGANDO:archivoComandos:" + str(self.__COMANDOS) )
             salida_ = "ok"
-
 
         return salida_
 

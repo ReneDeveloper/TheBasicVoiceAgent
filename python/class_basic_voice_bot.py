@@ -13,16 +13,16 @@ from class_util_command import UtilCommand
 
 class BasicVoiceBot:
 
-    __name                 = 'Sin configurar Bot'
-    __sex                 = 'o' #a:mujer o:hombre
-    __contexto             = 'sin contexto'
+    __name              = 'Sin configurar Bot'
+    __sex               = 'o' #a:mujer o:hombre
+    __contexto          = 'sin contexto'
     __hablar            = True
-    __humanBatchVoice     = True
-    __nombre_conocido    = ''
-    __maxspeed     = 0
-    __log         = True
+    __humanBatchVoice   = True
+    __nombre_conocido   = ''
+    __maxspeed          = 0
+    __log               = True
 
-    __traductor_001        = None
+    __traductor_001       = None
     _DATAFIX_HTML_REPLACE = None
 
     _POSIBLE_SALUDO = ("Hola", "Hola, cómo has estado", "Hola, que bueno verte")#THIS IS LIKE THE LIST OF A DECISION IN SOME CASES
@@ -35,22 +35,22 @@ class BasicVoiceBot:
     _POSIBLE_INSULTO_3 = ("estúpido", "pajaron", "malulo", "que roteque")
 
     __util_String = None
-    __util_Command = None
-    __util_Command_SRC = None
+    util_Command = None
+    #__util_Command_SRC = None
 
     engine = None
     engine_batch = None
 
     __map_COMANDOS = None
 
-    def __init__(self,name_):
+    def __init__(self,name_, file_tag):
         """function ____"""
         #self.__init__(self)
-        self.log("BasicVoiceBot:INIT:")
-        self.__name = "Sin configurar bot"
+        self.log('BasicVoiceBot:INIT:')
+        self.__name = 'Sin configurar bot'
         self.util_String = UtilString()
-        self.log("BasicVoiceBot:INIT:SETEANDO COMANDOS POR DEFECTO")
-        self.util_Command = UtilCommand("COMMAND_DEF_20200210.txt")
+        self.log('BasicVoiceBot:INIT:SETEANDO COMANDOS POR DEFECTO')
+        self.util_Command = UtilCommand(f'commands/COMMAND_DEF_{file_tag}.json')
 
         self.__name = name_
 
@@ -67,10 +67,10 @@ class BasicVoiceBot:
     def saludo(self):
         """function ____"""
         msgSaludo = random.choice(self._POSIBLE_SALUDO)
-        msgSaludo = msgSaludo + ", mi nombre es " + self.__name + ": Pregúntame cosas." 
-        msgSaludo = msgSaludo + ". Para salir, dime Bye!."
+        msgSaludo = msgSaludo + ', mi nombre es ' + self.__name + ': Pregúntame cosas.' 
+        msgSaludo = msgSaludo + '. Para salir, dime Bye!.'
 
-        msg_saludo_contextos = "Estoy programad" + self.__sex + " para aprendizaje automático y manejo de contextos" #los siguientes contextos: " + str(POSIBLES_CONTEXTOS)
+        msg_saludo_contextos = 'Estoy programad' + self.__sex + ' para aprendizaje automático y manejo de contextos' #los siguientes contextos: " + str(POSIBLES_CONTEXTOS)
         #msg_saludo_contextos = "Si no entiendo " +   str(POSIBLES_NO_ENTIENDO) 
         #print(msgSaludo)
         self.log('saludo: ' + msgSaludo)
@@ -85,37 +85,32 @@ class BasicVoiceBot:
         self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
         self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
 
-    def loadContext(self, ruta):
-        self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
-        self.log('*-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-**-*-*-*')
+    #def txt_FIX_ISO(self,user_response):
+    #    robo_response=""+user_response
+    #    robo_response = robo_response.replace("\\xe2\\x80\\x9c", "\"")
+    #    robo_response = robo_response.replace("brasil ", "brazil ")
+    #    return robo_response
 
-    def txt_FIX_ISO(self,user_response):
-        robo_response=""+user_response
-        robo_response = robo_response.replace("\\xe2\\x80\\x9c", "\"")
-        robo_response = robo_response.replace("brasil ", "brazil ")
-        return robo_response
+    #def getUtilComando(self):
 
-    def getUtilComando(self):
+        #self.log("getUtilComando-->self.__util_Command:" + self.__util_Command)
+        #self.log("getUtilComando-->self.__util_Command_SRC:" + self.__util_Command_SRC)
+        #self.log("getUtilComando-->self.__util_Command.__util_Command_SRC:" + self.__util_Command.__util_Command_SRC)
 
-        print("getUtilComando-->self.__util_Command:" + self.__util_Command)
-        print("getUtilComando-->self.__util_Command_SRC:" + self.__util_Command_SRC)
-        print("getUtilComando-->self.__util_Command.__util_Command_SRC:" + self.__util_Command.__util_Command_SRC)
+        #if (self.__util_Command==None):
+        #    self.__util_Command = UtilCommand()
+        #    self.__util_Command.__util_Command_SRC = self.__util_Command_SRC
+        #    print("EMPEZANDO CARGA DE COMANDOS:" + self.__util_Command_SRC)
+        #    self.__util_Command.cargaComandos(self.__util_Command_SRC)
 
+        #self.log("getUtilComando:" + self.__util_Command.__util_Command_SRC)
 
-        if (self.__util_Command==None):
-            self.__util_Command = UtilCommand()
-            self.__util_Command.__util_Command_SRC = self.__util_Command_SRC
-            print("EMPEZANDO CARGA DE COMANDOS:" + self.__util_Command_SRC)
-            self.__util_Command.cargaComandos(self.__util_Command_SRC)
-
-        print("getUtilComando:" + self.__util_Command.__util_Command_SRC)
-
-        return self.__util_Command
+        #return self.__util_Command
 
     def setUtilComando_SRC(self,src_comandos):
         print("setUtilComando_SRC: " + src_comandos)
         util_command = UtilCommand(src_comandos)
-        util_command.cargaComandos(src_comandos)
+        #util_command.cargaComandos(src_comandos)
         self.__util_Command = util_command
 
         """
@@ -138,14 +133,13 @@ class BasicVoiceBot:
 
         interact_out = "No te entiendo, me falta información"
 
-
-        if (self.__util_Command==None):
-            self.__util_Command = UtilCommand("COMMAND_DEF_20200210.txt")
-        mapa_COMANDO = self.__util_Command.getMapaComando(msg)
+#        if (self.__util_Command==None):
+#            self.__util_Command = UtilCommand("COMMAND_DEF_20200210.txt")
+        mapa_COMANDO = self.util_Command.getMapaComando(msg)
 
         comando="sin_comando"#ignorando 
 
-        print("mapa_COMANDO:" + str(mapa_COMANDO)  ) 
+        self.log("mapa_COMANDO:" + str(mapa_COMANDO)  ) 
 
         if (comando=="saluda"):
             msgSaludo = ""
