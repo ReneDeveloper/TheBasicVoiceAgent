@@ -8,19 +8,18 @@ from nltk.corpus import stopwords
 class UtilCommand:
 
     __LOG_ACTIVO = True
-    __src_comandos = None
+    #__src_comandos = None
     __COMANDOS = None
+    __RESPONSES = None
 
 #    _MAP_SUCURSALES_POSIBLES = {"local lyon":1,"enjoy coquimbo":1,"coquimbo":1, "viña":2,"viña del mar":2, "enjoy viña":2,  "enjoy santiago":3 ,"enjoy de los andes":3,"enjoy chiloe":4 }
 #    __MAPA_BASE = None
 #    def __init__(self,mapa_base):
 
-    def __init__(self, src_comandos):
+    def __init__(self, file_tag):
         """function """
-        print("FLUJO:UtilCommand:__init__:src_Comandos" + src_comandos)
-        self.log("FLUJO:UtilCommand:__init__")
-        self.__src_comandos = src_comandos
-        self.carga_comandos(src_comandos)
+        self.log("FLUJO:UtilCommand:__init__:file_tag" + file_tag)
+        self.carga_comandos(file_tag)
 
     def log(self,msg_):
         """function """
@@ -109,19 +108,28 @@ class UtilCommand:
         raw_fix = self.string_FIX_002(raw_fix)
         return raw_fix
 
-    def carga_comandos(self,src_comandos):
+    def carga_comandos(self,file_tag):
         """function """
-        print("cargaComandos:" + str(src_comandos) )
-        salida_ = ""
+        src_comandos = f'commands/COMMAND_DEF_{file_tag}.json'
 
-        #archivoComandos = src
-        
+        print("carga comandos:" + str(src_comandos) )
+        salida_ = ""
         if (self.__COMANDOS==None):
             f = open(src_comandos, 'r')
             self.__COMANDOS = json.loads(f.read())
             print("CARGANDO:archivoComandos:" + str(src_comandos) )
             print("CARGANDO:archivoComandos:" + str(self.__COMANDOS) )
-            salida_ = "ok"
+            salida_ = "ok comandos"
+
+        src_response = f'commands/COMMAND_DEF_{file_tag}_RESPONSES.json'
+        print("carga response:" + src_response )
+
+        if (self.__RESPONSES==None):
+            f = open(src_response, 'r')
+            self.__RESPONSES = json.loads(f.read())
+            print("CARGANDO:archivoResponses:" + str(src_response) )
+            print("CARGANDO:archivoResponses:" + str(self.__RESPONSES) )
+            salida_ = salida_ + " ok responses"
 
         return salida_
 
