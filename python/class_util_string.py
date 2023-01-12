@@ -39,64 +39,64 @@ class UtilString:
 
 
 	def string_FIX_000(self,val):
-		valFix=""+val
+		val_fix=""+val
 
-		valFix = valFix.replace("ãƒâ¡", "á")
-		valFix = valFix.replace("ãƒâ³", "ó")
-		valFix = valFix.replace("ãƒâ±", "ñ")
+		val_fix = val_fix.replace("ãƒâ¡", "á")
+		val_fix = val_fix.replace("ãƒâ³", "ó")
+		val_fix = val_fix.replace("ãƒâ±", "ñ")
 
-		valFix = valFix.replace("ãƒâ©", "é")
-		valFix = valFix.replace("ã©", "é")
+		val_fix = val_fix.replace("ãƒâ©", "é")
+		val_fix = val_fix.replace("ã©", "é")
 		
-		valFix = valFix.replace("ãƒâº", "ú")
+		val_fix = val_fix.replace("ãƒâº", "ú")
 
-		valFix = valFix.replace("ã¢â€âœ", "\"")
-		valFix = valFix.replace("ã¢â€â", "\"")
-		valFix = valFix.replace("ã‚â´", "'")
-		valFix = valFix.replace("ãƒâ­", "í")
+		val_fix = val_fix.replace("ã¢â€âœ", "\"")
+		val_fix = val_fix.replace("ã¢â€â", "\"")
+		val_fix = val_fix.replace("ã‚â´", "'")
+		val_fix = val_fix.replace("ãƒâ­", "í")
 
 
-		valFix = valFix.replace("ecommerce", "e-commerce")
-		valFix = valFix.replace("crossborder", "cross-border")
-		valFix = valFix.replace("ehunting", "e-hunting")
+		val_fix = val_fix.replace("ecommerce", "e-commerce")
+		val_fix = val_fix.replace("crossborder", "cross-border")
+		val_fix = val_fix.replace("ehunting", "e-hunting")
 
-		valFix = valFix.replace("\na-\n", "\n")
-		valFix = valFix.replace("\na+\n", "\n")
-		valFix = valFix.replace("\n\n", "\n")
-		valFix = valFix.replace("\n\n", "\n")
-		valFix = valFix.replace("\n\n", "\n")
-		valFix = valFix.replace("\n\n", "\n")
+		val_fix = val_fix.replace("\na-\n", "\n")
+		val_fix = val_fix.replace("\na+\n", "\n")
+		val_fix = val_fix.replace("\n\n", "\n")
+		val_fix = val_fix.replace("\n\n", "\n")
+		val_fix = val_fix.replace("\n\n", "\n")
+		val_fix = val_fix.replace("\n\n", "\n")
 
-		return valFix
+		return val_fix
 
 	def string_FIX_001(self,val):
-		valFix=""+val
-		valFix = valFix.replace("ãƒâ¡", "á")
-		valFix = valFix.replace("ãƒâ³", "ó")
-		valFix = valFix.replace("ãƒâ±", "ñ")
-		valFix = valFix.replace("ãƒâ©", "é")
-		valFix = valFix.replace("ãƒâº", "ú")
-		valFix = valFix.replace("ã¢â€âœ", "\"")
-		valFix = valFix.replace("ã¢â€â", "\"")
-		valFix = valFix.replace("ã‚â´", "'")
-		valFix = valFix.replace("ãƒâ­", "í")
-		return valFix
+		val_fix=""+val
+		val_fix = val_fix.replace("ãƒâ¡", "á")
+		val_fix = val_fix.replace("ãƒâ³", "ó")
+		val_fix = val_fix.replace("ãƒâ±", "ñ")
+		val_fix = val_fix.replace("ãƒâ©", "é")
+		val_fix = val_fix.replace("ãƒâº", "ú")
+		val_fix = val_fix.replace("ã¢â€âœ", "\"")
+		val_fix = val_fix.replace("ã¢â€â", "\"")
+		val_fix = val_fix.replace("ã‚â´", "'")
+		val_fix = val_fix.replace("ãƒâ­", "í")
+		return val_fix
 
 	def string_FIX_002(self,val):
-		valFix=""+val
-		valFix = valFix.replace("ã¡", "á")
-		valFix = valFix.replace("ã³", "ó")
-		valFix = valFix.replace("ã±", "ñ")
-		valFix = valFix.replace("ã©", "é")
-		valFix = valFix.replace("ãº", "ú")
-		valFix = valFix.replace("â€œ", "\"")
-		valFix = valFix.replace("â€", "\"")
-		#valFix = valFix.replace("ã‚â´", "'")
-		valFix = valFix.replace("ã­", "í")
-		return valFix
+		val_fix=""+val
+		val_fix = val_fix.replace("ã¡", "á")
+		val_fix = val_fix.replace("ã³", "ó")
+		val_fix = val_fix.replace("ã±", "ñ")
+		val_fix = val_fix.replace("ã©", "é")
+		val_fix = val_fix.replace("ãº", "ú")
+		val_fix = val_fix.replace("â€œ", "\"")
+		val_fix = val_fix.replace("â€", "\"")
+		#val_fix = val_fix.replace("ã‚â´", "'")
+		val_fix = val_fix.replace("ã­", "í")
+		return val_fix
 
 	def string_remove_stop_words(self,val):
-		valClean = ""
+		val_clean = ""
 		#val = 'El problema del matrimonio es que se acaba todas las noches despues de hacer el amor, y hay que volver a reconstruirlo todas las mananas antes del desayuno.'
 
 		#We only want to work with lowercase for the comparisons
@@ -111,7 +111,7 @@ class UtilString:
 		for word in words:
 			if word not in stopwords.words('spanish'):
 				important_words.append(word)
-				valClean = valClean + ' ' + word
+				val_clean = val_clean + ' ' + word
 
 		#print (important_words)
 
@@ -119,63 +119,62 @@ class UtilString:
 		#important_words = filter(lambda x: x not in stopwords.words('spanish'), words)
 
 		#print (important_words )
-		valClean = valClean.strip()
-		return valClean
+		val_clean = val_clean.strip()
+		return val_clean
 
 	def buscaComando(self,val):
-		salidaComando = "sin_comando"
-		valClean = self.string_remove_stop_words(val)
-		print("buscando comando en: -->" + valClean + "<--")
-		if ("cuéntame" in valClean or "sabes" in valClean or "dime" in valClean or "información" in valClean):
-			valClean = valClean.replace("acerca","")
-			valClean = valClean.replace("cuéntame","sabes")
-			valClean = valClean.replace("dime","sabes")
-			valClean = valClean.replace("sabes","")
-			valClean = valClean.strip()
-			predicado = valClean
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "sabes" + "__" + predicado
+		salida_omando = "sin_comando"
+		val_clean = self.string_remove_stop_words(val)
+		print("buscando comando en: -->" + val_clean + "<--")
+		if "cuéntame" in val_clean or "sabes" in val_clean or "dime" in val_clean or "información" in val_clean:
+			val_clean = val_clean.replace("acerca","")
+			val_clean = val_clean.replace("cuéntame","sabes")
+			val_clean = val_clean.replace("dime","sabes")
+			val_clean = val_clean.replace("sabes","")
+			val_clean = val_clean.strip()
+			predicado = val_clean
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "sabes" + "__" + predicado
 
-		if ( ("nombre" in valClean ) or "mi nombre es " in val or "me llamo " in val):
-			#predicado = valClean[valClean.find("nombre"):len(valClean)] 
-			valClean = valClean.replace("nombre","")
-			valClean = valClean.replace("llamo","")
-			valClean = valClean.strip()
-			predicado = valClean
-			salidaComando = "nombre" + "__" + predicado
+		if "nombre" in val_clean or ( "mi nombre es " in val or "me llamo " in val):
+			#predicado = val_clean[val_clean.find("nombre"):len(val_clean)] 
+			val_clean = val_clean.replace("nombre","")
+			val_clean = val_clean.replace("llamo","")
+			val_clean = val_clean.strip()
+			predicado = val_clean
+			salida_omando = "nombre" + "__" + predicado
 
-		if ("hasta luego" in val or "adios" in valClean or "nos vemos" in val or "chao" in valClean):
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "despedida" + "__" + "despedida"
+		if "hasta luego" in val or "adios" in val_clean or "nos vemos" in val or "chao" in val_clean:
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "despedida" + "__" + "despedida"
 
-
-		if ("chetumare" in valClean or "imbécil" in valClean):
+		if "chetumare" in val_clean or "imbécil" in val_clean:
 			predicado = "<nombre>"
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "insultar" + "__" + "<nombre>"
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "insultar" + "__" + "<nombre>"
 
-		if ("maldito" in valClean or "escoria" in valClean):
+		if "maldito" in val_clean or "escoria" in val_clean:
 			predicado = "<nombre>"
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "insultar2" + "__" + "<nombre>"
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "insultar2" + "__" + "<nombre>"
 
-		if ("hola" in valClean ):
+		if "hola" in val_clean :
 			predicado = "<nombre>"
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "saluda" + "__" + "<nombre>"
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "saluda" + "__" + "<nombre>"
 
-		bol_contexto_locales =  any(string in valClean for string in ["cargar contexto locales","carga contexto locales","cambiar contexto locales","entrar a contexto locales"] )
+		bol_contexto_locales =  any(string in val_clean for string in ["cargar contexto locales","carga contexto locales","cambiar contexto locales","entrar a contexto locales"] )
 
-		if (bol_contexto_locales):
+		if bol_contexto_locales:
 			#predicado = "<nombre>"
-			#predicado = valClean[valClean.find("sabes"):len(valClean)] 
-			salidaComando = "carga_contexto" + "__" + "locales"
+			#predicado = val_clean[val_clean.find("sabes"):len(val_clean)] 
+			salida_omando = "carga_contexto" + "__" + "locales"
 
-		salidaComando = salidaComando.replace("  "," ")
-		if (salidaComando!="sin_comando"):
-			print("comando encontrado:" + salidaComando)
+		salida_omando = salida_omando.replace("  "," ")
+		if salida_omando!="sin_comando":
+			print("comando encontrado:" + salida_omando)
 
-		return salidaComando
+		return salida_omando
 
 #salida = "que sabes acerca de"
 

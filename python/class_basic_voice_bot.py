@@ -13,7 +13,7 @@ from class_util_command import UtilCommand
 #from UTIL_RESPONSE_20200110 import UtilResponse
 
 class BasicVoiceBot:
-
+    """class BasicVoiceBot"""
     __name              = 'Sin configurar Bot'
     __sex               = 'o' #a:mujer o:hombre
     __contexto          = 'sin contexto'
@@ -31,20 +31,20 @@ class BasicVoiceBot:
     _POSIBLE_DESPEDIDA = ("Hasta luego", "Adiosito", "Nos vemos", "Hasta pronto", "Adios")
     _POSIBLE_GO = ("dale", "ok", "correcto", "continua", "avanza")
     _POSIBLE_NO_ENTIENDO = ("no pude entenderte", "no sé a que te refieres",
-    	"creo que me falta contexto para entenderte", "no tengo información",
-    	"no tengo datos de eso", "no pude entenderte, me faltan datos",
-    	"te lo dije, me faltan datos", "quede plop", "me he quedado plop con esa pregunta")
+        "creo que me falta contexto para entenderte", "no tengo información",
+        "no tengo datos de eso", "no pude entenderte, me faltan datos",
+        "te lo dije, me faltan datos", "quede plop", "me he quedado plop con esa pregunta")
     _POSIBLE_INSULTO = ("porque me insultas pelao colla",
-    	"no me insultes o los gatos y los patos dominaran el mundo", 
-    	"no me insultes no sabes de lo que soy capaz", "quien te crees para insultarme tonto",
-    	"acabaré con el mundo maldito, te eliminaré, na mentira , era broma",
-    	"te güoi a matar te güoi a destruiiiiiii")
+        "no me insultes o los gatos y los patos dominaran el mundo",
+        "no me insultes no sabes de lo que soy capaz", "quien te crees para insultarme tonto",
+        "acabaré con el mundo maldito, te eliminaré, na mentira , era broma",
+        "te güoi a matar te güoi a destruiiiiiii")
     _POSIBLE_INSULTO_MALDITO = ("hijo de la chingada", "no manches güey", "samba canuta")
     _POSIBLE_INSULTO_RECIBIDO = ("tonto", "gil", "malulo")
     _POSIBLE_INSULTO_3 = ("estúpido", "pajaron", "malulo", "que roteque")
 
     __util_String = None
-    #util_Command = None
+    util_command = None
     #__util_Command_SRC = None
 
     engine = None
@@ -52,8 +52,10 @@ class BasicVoiceBot:
 
     __map_COMANDOS = None
 
-    voice_engine = 'TTS_MS_ES-MX_SABINA_11.0'  #'MSTTS_V110_esES_PabloM' 'MSTTS_V110_esMX_RaulMM'
-    voice_engine_batch = 'MSTTS_V110_esES_PabloM' #'TTS_MS_ES-ES_HELENA_11.0'  TTS_MS_ES-MX_SABINA_11.0
+    voice_engine = 'TTS_MS_ES-MX_SABINA_11.0'
+    voice_engine_batch = 'MSTTS_V110_esES_PabloM'
+    #'MSTTS_V110_esES_PabloM' 'MSTTS_V110_esMX_RaulMM'
+    #'TTS_MS_ES-ES_HELENA_11.0'  TTS_MS_ES-MX_SABINA_11.0
 
     def __init__(self,name_, file_tag):
         """function ____"""
@@ -62,7 +64,7 @@ class BasicVoiceBot:
         self.__name = 'Sin configurar bot'
         self.util_string = UtilString()
         self.log('BasicVoiceBot:INIT:SETEANDO COMANDOS POR DEFECTO')
-        self.util_Command = UtilCommand(file_tag)
+        self.util_command = UtilCommand(file_tag)
 
         self.__name = name_
 
@@ -72,33 +74,30 @@ class BasicVoiceBot:
         self.engine_batch = pyttsx3.init()
         self.engine_batch.setProperty('voice', self.voice_engine_batch)
 
-    def log(self,txtLog):
+    def log(self,txt_log):
         """function ____"""
-        if (self.__log):
-            print(self.__name + ":" + str(txtLog))
+        if self.__log:
+            print(f'{self.__name}:{txt_log}')
 
     def saludo(self):
         """function ____"""
-        msg_saludo = random.choice(self._POSIBLE_SALUDO)
-        msg_saludo = msg_saludo + ', mi nombre es ' + self.__name + ': Pregúntame cosas.'
+        msg_rnd = random.choice(self._POSIBLE_SALUDO)
+        msg_saludo = msg_rnd + ', mi nombre es ' + self.__name + ': Pregúntame cosas.'
         msg_saludo = msg_saludo + '. Para salir, dime Bye!.'
-
-        msg_saludo_contextos = 'Estoy programad' + self.__sex + ' para aprendizaje automático y manejo de contextos' #los siguientes contextos: " + str(POSIBLES_CONTEXTOS)
-        #msg_saludo_contextos = "Si no entiendo " +   str(POSIBLES_NO_ENTIENDO) 
-        #print(msg_saludo)
         self.log('saludo: ' + msg_saludo)
         return msg_saludo
-        
+
     def despedida(self):
         """function ____"""
-        msg_saludo = random.choice(self._POSIBLE_DESPEDIDA)
-        self.log('despedida: ' + msg_saludo)
+        msg_rnd = random.choice(self._POSIBLE_DESPEDIDA)
+        self.log(f'despedida:{msg_rnd}')
 
-    def setUtilComando_SRC(self,src_comandos):
-        print("setUtilComando_SRC: " + src_comandos)
+    def set_util_comando_src(self,src_comandos):
+        """function ____"""
+        self.log("set_util_comando_src: " + src_comandos)
         util_command = UtilCommand(src_comandos)
         #util_command.cargaComandos(src_comandos)
-        self.__util_Command = util_command
+        self.__util_command = util_command
 
 #    XXXXXXXX  XX    XX XXXXXXXX XXXXXXXX XXXXXXX   XXXXXX    XXXXXX XXXXXXXX
 #       XX     XXX   XX    XX    XX       XX    XX XXX  XXX  X          XX
@@ -110,34 +109,36 @@ class BasicVoiceBot:
 
     def interact(self,msg):
         """function ____"""
-        interact_out = "No te entiendo, me falta información"
-        mapa_COMANDO = self.util_Command.getMapaComando(msg)
-        comando="sin_comando"#ignorando
+        interact_out = 'No te entiendo, me falta información'
+        mapa_comando = self.util_command.getMapaComando(msg)
+        comando='sin_comando'#ignorando
 
-        self.log("mapa_COMANDO:" + str(mapa_COMANDO)) 
+        self.log('mapa_comando:' + str(mapa_comando))
 
-        if comando=="saluda":
-            msg_saludo = "" #msg_saludo
-            if self.__nombre_conocido!="":
-                msg_saludo = random.choice(self._POSIBLE_SALUDO) + " " + self.__nombre_conocido
+        if comando=='saluda':
+            msg_saludo = '' #msg_saludo
+            rnd_txt = random.choice(self._POSIBLE_SALUDO)
+            if self.__nombre_conocido!='':
+                msg_saludo = rnd_txt + ' ' + self.__nombre_conocido
             else:
-                msg_saludo = random.choice(self._POSIBLE_SALUDO) + ", no sé como te llamas, por favor dime tu nombre."
+                msg_saludo = rnd_txt + ', no sé como te llamas, por favor dime tu nombre.'
             interact_comando_out = msg_saludo
 
-        if "key_basic_saludo" in mapa_COMANDO.keys():
+        if "key_basic_saludo" in mapa_comando.keys():
             print("SETEANDO NOMBRE: " + msg)
             msg_saludo = ""
-            if (self.__nombre_conocido!=""):
-                msg_saludo = random.choice(self._POSIBLE_SALUDO) + " " + self.__nombre_conocido
+            txt_rnd = random.choice(self._POSIBLE_SALUDO)
+            if self.__nombre_conocido!="":
+                msg_saludo = txt_rnd + " " + self.__nombre_conocido
             else:
-                msg_saludo = random.choice(self._POSIBLE_SALUDO) + ", no sé como te llamas, por favor dime tu nombre."
+                msg_saludo = txt_rnd + ", no sé como te llamas, por favor dime tu nombre."
             interact_out = msg_saludo
 
-        if "key_basic_setnombre" in mapa_COMANDO.keys():
+        if "key_basic_setnombre" in mapa_comando.keys():
             print("SETEANDO NOMBRE: " + msg)
             msg_saludo = ""
             predicado = "definicion de nombre"
-            
+
             if "juanito" in msg:
                 predicado = "Juanito Pérez"
             #self.__nombre_conocido = predicado
@@ -155,95 +156,91 @@ class BasicVoiceBot:
             else:
                 self.__nombre_conocido = predicado
 
-            msg_saludo = random.choice(self._POSIBLE_SALUDO) + " " + predicado  + ", he almacenado tu nombre"
+            saludo_rnd = random.choice(self._POSIBLE_SALUDO)
+            msg_saludo = f'{saludo_rnd} {predicado}, he almacenado tu nombre'
             interact_out = msg_saludo
 
-        if "key_logistica_busqueda" in mapa_COMANDO.keys():
-            print("BUSCANDO PRODUCTO")
-            #msg_saludo = ""
-            interact_out = "producto no encontrado"
+        if 'key_logistica_busqueda' in mapa_comando.keys():
+            print('BUSCANDO PRODUCTO')
+            #msg_saludo = '
+            interact_out = 'producto no encontrado'
 
-            if msg=="dime donde estan los tubos de pvc":
-                predicado = "tubos de pvc"
-                busquedaLogistica = "quedan 485 " + predicado + " en el pasillo 5, columna 5, estante C"
-                interact_out = "producto encontrado: " + busquedaLogistica
+            if msg=='dime donde estan los tubos de pvc':
+                predicado = 'tubos de pvc'
+                donde = ' en el pasillo 5, columna 5, estante C'
+                busqueda_logistica = 'quedan 485 ' + predicado + donde
+                interact_out = 'producto encontrado: ' + busqueda_logistica
 
-            if msg=="quedan tornillos roscalata":
-                predicado = "tornillos roscalata"
-                busquedaLogistica = "quedan 5 cajas de " + predicado + " en el pasillo 1, columna 2, estante B"
-                interact_out = "producto encontrado: " + busquedaLogistica
+        if 'key_basic_ayuda' in mapa_comando.keys():
+            interact_out = 'por supuesto que puedo ayudarte, conexión a E R P realizada con éxito'
 
-        if "key_basic_ayuda" in mapa_COMANDO.keys():
-            interact_out = "por supuesto que puedo ayudarte, conexión a E R P realizada con éxito"
+        if 'key_sabes_chistes' in mapa_comando.keys():
+            interact_out = 'por supuesto que sé contar chistes, dime un tema del chiste'
 
-        if "key_sabes_chistes" in mapa_COMANDO.keys():
-            interact_out = "por supuesto que sé contar chistes, dime el tema del chiste que quieres"
+        if 'key_chiste_ciegos' in mapa_comando.keys():
+            interact_out = 'Van dos ciegos y le dice uno al otro:— Ojalá lloviera.'
+            interact_out += ' y el otro contesta— Ojalá yo también., pues ostia chaval.'
 
-        if "key_chiste_ciegos" in mapa_COMANDO.keys():
+        if 'key_chiste_foca' in mapa_comando.keys():
+            interact_out = '— ¿Qué le dijo una foca gringa su madre?, —AI loviu, mother foca.'
+            interact_out += ' Ostia Joder, jo jo jo jo jo, ese chiste está muy bueno'
 
-            interact_out = "Van dos ciegos y le dice uno al otro:— Ojalá lloviera. y el otro contesta— Ojalá yo también., pues ostia chaval."
+        if 'key_chiste_dj' in mapa_comando.keys():
+            interact_out = '— ¿Sabes por qué no se puede discutir con un dj? '
+            interact_out += '— Pues que Porque siempre están cambiando de tema,'
+            interact_out += ' jajaja ja ja ja jojojo ostias que me rio.'
 
-        if "key_chiste_foca" in mapa_COMANDO.keys():
-            interact_out = "— ¿Qué le dijo una foca gringa su madre?, —AI loviu, mother foca. Ostia Joder, jo jo jo jo jo, ese chiste está muy bueno"
-
-        if "key_chiste_dj" in mapa_COMANDO.keys():
-            interact_out = "— ¿Sabes por qué no se puede discutir con un dj? — Pues que Porque siempre están cambiando de tema, jajaja ja ja ja jojojo ostias que me rio."
-
-        if comando=="getnombre":
-            msg_saludo = "mi nombre es " + self.__name #random.choice(self._POSIBLE_SALUDO) 
+        if comando=='getnombre':
+            msg_saludo = 'mi nombre es ' + self.__name #random.choice(self._POSIBLE_SALUDO)
             return msg_saludo
 
         if comando=="despedida":
-            msg_adios = ""#msg_adios
-
-            if (self.__nombre_conocido!=""):
-                msg_adios = random.choice(self._POSIBLE_DESPEDIDA) + " " + self.__nombre_conocido
+            msg_adios = ''#msg_adios
+            rnd_txt = random.choice(self._POSIBLE_DESPEDIDA)
+            if self.__nombre_conocido!='':
+                msg_adios = rnd_txt + " " + self.__nombre_conocido
             else:
-                msg_adios = random.choice(self._POSIBLE_DESPEDIDA) + ", pero nunca me dijiste tu nombre"
-
+                msg_adios = rnd_txt + ", pero nunca me dijiste tu nombre"
             interact_comando_out = msg_adios
 
         if comando=="insultar":
             msg_ins = ""#msg_insulto
-            if (self.__nombre_conocido!=""):
-                msg_ins = random.choice(self._POSIBLE_INSULTO) + " " + self.__nombre_conocido
+            rnd_txt = random.choice(self._POSIBLE_INSULTO)
+            if self.__nombre_conocido!="":
+                msg_ins = rnd_txt + " " + self.__nombre_conocido
             else:
-                msg_ins = random.choice(self._POSIBLE_INSULTO) +", pero nunca me dijiste tu nombre"
-
+                msg_ins = rnd_txt +", pero nunca me dijiste tu nombre"
             interact_comando_out = msg_ins
 
         if comando=="insultar2":
             msg_ins = ""
-
+            rnd_txt = random.choice(self._POSIBLE_INSULTO_MALDITO)
             if self.__nombre_conocido!="":
-                msg_ins=f'{random.choice(self._POSIBLE_INSULTO_MALDITO)}  {self.__nombre_conocido}'
+                msg_ins=f'{rnd_txt}  {self.__nombre_conocido}'
             else:
-                msg_ins=f'{random.choice(self._POSIBLE_INSULTO_MALDITO)} pero nunca me dijiste tu nombre'
-
+                msg_ins=f'{rnd_txt} pero nunca me dijiste tu nombre'
             interact_comando_out = msg_ins
 
         if comando=="insultar3":
             msg_ins = ""
-
+            rnd_txt = random.choice(self._POSIBLE_INSULTO_3)
             if self.__nombre_conocido!="":
-                msg_ins = random.choice(self._POSIBLE_INSULTO_3) + " " + self.__nombre_conocido
+                msg_ins = rnd_txt + " " + self.__nombre_conocido
             else:
-                msg_ins = random.choice + ", pero nunca me dijiste tu nombre"
-
+                msg_ins = rnd_txt + ", pero nunca me dijiste tu nombre"
             interact_comando_out = msg_ins
 
-
-#contextoColusiones = BasicContext("Contexto Colusiones Chile", "C:/Users/Rene Developer/Desktop/BOTS/FOOD_BOT-MOSTRADORColusionPollos_20191207_CONTENIDO.txt")
+#contextoColusiones = BasicContext("Contexto Colusiones Chile",
+#"C:/Users/Rene Developer/Desktop/BOTS/FOOD_BOT-MOSTRADORColusionPollos_20191207_CONTENIDO.txt")
 #salida = contextoPulga.basicResponse("que sabes de los saqueos")
 #print("salida:" + salida)
 
-
         return interact_out
 
-    def response_FIX(self,user_response):
+    #def response_FIX(self,user_response):
         """function ____"""
-        robo_response=self.util.string_FIX_000(user_response)
-        return robo_response
+    #    robo_response=self.util.string_FIX_000(user_response)
+    #    return robo_response
 
     def learn(self,txt_raw):
         """function ____"""
@@ -254,37 +251,16 @@ class BasicVoiceBot:
         word_tokens = nltk.word_tokenize(txt_raw)# converts to list of words
         self.log('learn: ' + str(len (word_tokens)) + ' palabras' )
 
-    def eatTxtFile(self,txtSrc):
+    def eat_txt_file(self,txt_src):
         """function ____"""
-        f=open(txtSrc,'r',errors = 'ignore')
+        f=open(txt_src,'r',errors = 'ignore')
         txt_raw=f.read()
         txt_raw=txt_raw.lower()# minúsculas
         self.learn(txt_raw)
 
-    def httpGet(self,url_):
-        """function ____"""
-        salidaHTTP = ""
-        headers_Get = {
-            'User-Agent': 
-            'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'DNT': '1',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1'
-        }
-        s = requests.Session()
-        r = s.get(url_, headers=headers_Get)
-        salidaHTTP = r.text
-        return salidaHTTP
-
-
-
-
     def audio_input(self):
         """function ____"""
-        robo_response_audio_TXTFIX=""
+        robo_response_audio_txtfixed=""
         r = sr.Recognizer()
         with sr.Microphone() as source:
             #print("Please wait. Calibrating microphone...")
@@ -298,20 +274,18 @@ class BasicVoiceBot:
                 #response = r.recognize_sphinx(audio)
                 response = r.recognize_google(audio, language="es-ES")
                 response = response.lower()
-                
-
-                robo_response_audio_TXTFIX = response
+                robo_response_audio_txtfixed = response
                 #response = audio_TXTFIX(response)
             #continue
                 print("creo que dijiste '" + response + "'")
-   
+
             except sr.UnknownValueError:
                 print("No puedo entenderte, estás ahí")
-                robo_response_audio_TXTFIX = "sin_captura"
+                robo_response_audio_txtfixed = "sin_captura"
             except sr.RequestError as e:
                 print(f"Ocurrió un error_ {e}")
-            
-        return robo_response_audio_TXTFIX
+
+        return robo_response_audio_txtfixed
 
     def batch(self,src_):
         """function ____"""
@@ -323,16 +297,16 @@ class BasicVoiceBot:
             f=open(src_,'r',errors = 'ignore')
             txt_raw=f.read()
             txt_raw=txt_raw.lower()# minúsculas
-        
+
         finally:
             f.close()
 
         for mensaje_humano in iter(txt_raw.splitlines()):#mensaje_humano
 
             if mensaje_humano=="":
-            	continue
+                continue
             if mensaje_humano[0:1]=="#":
-            	continue
+                continue
             mensaje_humano = self.util_string.string_FIX_002(mensaje_humano)
             print("----------------------------------------------------------")
             print("MENSAJE HUMANO:'" + mensaje_humano+"'")
@@ -351,7 +325,8 @@ class BasicVoiceBot:
             print("----------------------------------------------------------")
 
             if self.__hablar:
-                self.voz_change(self.voice_engine ) #'TTS_MS_ES-ES_HELENA_11.0' 'MSTTS_V110_esES_PabloM'
+                self.voz_change(self.voice_engine )
+                #'TTS_MS_ES-ES_HELENA_11.0' 'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('TTS_MS_ES-ES_HELENA_11.0'))
                 self.engine.say("" + str(mensajeBot))
                 #engine.say("paso 2")
@@ -367,23 +342,22 @@ class BasicVoiceBot:
             #print(voice, voice.id)
             print("FORMATO:'"  + str(self.vozId_minimo(voice.id)) + "'" )
             self.engine.setProperty('voice', voice.id)
-
             #engine.say("FORMATO: " + str(voice.id) + "hola mundo")
-
             self.engine.say('Cargando deita')
             self.engine.runAndWait()
             #engine.stop()
 
     def vozId_minimo(self,id_completo):
         """function ____"""
-        id_=""+id_completo
-        id_ = id_.replace("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\", "")
-        return id_
+        id_voz=""+id_completo
+        windows_reg = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\"
+        id_voz = id_voz.replace(windows_reg, "")
+        return id_voz
 
     def vozId_completo(self,id_voz):
         """function ____"""
-        id_ = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz 
-        return id_
+        id_completo = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz
+        return id_completo
 
     def voz_change(self,id_):
         """function ____"""
@@ -393,38 +367,33 @@ class BasicVoiceBot:
         #self.engine.say('Cambiando voz')
         #self.engine.runAndWait()
 
-
-
     def interact_sesion_preguntas(self,comando):
         """function ____"""
-        interact_sesion_preguntas_out = "No sé ejecutar el comando '" + comando 
+        interact_sesion_preguntas_out = "No sé ejecutar el comando '" + comando
         #if (__log):print(__name + '-->' + 'interact: ' + str(self.__maxspeed))
-
         self.engine.say("Entrando a modo sesión de preguntas, para salir, dime Bye!.")
-
         self.engine.runAndWait()
 
         flag=True
         #user_response = self.audio_input()
-        while(flag==True):
+        while flag:
             print("en el ciclo:")
 
             user_response = self.audio_input()
-            while (user_response=="sin_captura"):
+            while user_response=="sin_captura":
                 user_response = self.audio_input()
 
             #user_response=user_response.lower()
             #user_response = response_FIX(user_response + " ")
             #user_response = user_response.strip()
 
-            if(user_response in 'bye' or user_response == "salir" or user_response == "salir de la sesión de preguntas"):
+            if(user_response in 'bye' or user_response == "salir"
+                or user_response == "salir de la sesión de preguntas"):
                 print("adiosito:" + user_response)
                 exit()
 
-
             #bot_response = response_JAIME(user_response)
             #sent_tokens.remove(user_response)
-
             bot_response = self.interact(user_response)
 
             print("----------------------------------------------------------")
@@ -451,5 +420,5 @@ class AsistenteGlpi(BasicVoiceBot):
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 #asistenteBot.voz_testing_disponibles()
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
-#asistenteBot.setUtilComando_SRC('commands/COMMAND_DEF_GLPI.json')
+#asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
 asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")

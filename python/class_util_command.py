@@ -89,6 +89,7 @@ class UtilCommand:
                 #print ( "tieneComando:" + str(tieneComando) )
                 if tieneComando:
                     salida_DICT[ key_comando ] = tieneComando
+                    salida_DICT[ 'VECTOR_'+key_comando ] = self.__RESPONSES.get(key_comando)
 
             #lo mismo para la key, pero parametros podría ser otro vector de salida
             #configurable a partir de un segundo comando
@@ -114,22 +115,23 @@ class UtilCommand:
 
         print("carga comandos:" + str(src_comandos) )
         salida_ = ""
-        if (self.__COMANDOS==None):
+        if self.__COMANDOS==None:
             f = open(src_comandos, 'r')
             self.__COMANDOS = json.loads(f.read())
             print("CARGANDO:archivoComandos:" + str(src_comandos) )
             print("CARGANDO:archivoComandos:" + str(self.__COMANDOS) )
             salida_ = "ok comandos"
 
-        src_response = f'commands/COMMAND_DEF_{file_tag}_RESPONSES.json'
-        print("carga response:" + src_response )
-
-        if (self.__RESPONSES==None):
+        src_response = f'commands/COMMAND_RES_{file_tag}.json' #f'commands/COMMAND_DEF_{file_tag}_RESPONSE.json'
+        print("carga comandos:" + str(src_response) )
+        
+        if self.__RESPONSES==None:
             f = open(src_response, 'r')
             self.__RESPONSES = json.loads(f.read())
-            print("CARGANDO:archivoResponses:" + str(src_response) )
-            print("CARGANDO:archivoResponses:" + str(self.__RESPONSES) )
+            print("CARGANDO:archivoComandos:" + str(src_response) )
+            print("CARGANDO:archivoComandos:" + str(self.__RESPONSES) )
             salida_ = salida_ + " ok responses"
+
 
         return salida_
 
