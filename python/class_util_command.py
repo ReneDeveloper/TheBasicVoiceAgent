@@ -116,8 +116,8 @@ class UtilCommand:
         print("carga comandos:" + str(src_comandos) )
         salida_ = ""
         if self.__COMANDOS==None:
-            f = open(src_comandos, 'r')
-            self.__COMANDOS = json.loads(f.read())
+            file_json = open(src_comandos, 'r',encoding='utf-8')
+            self.__COMANDOS = json.loads(file_json.read())
             print("CARGANDO:archivoComandos:" + str(src_comandos) )
             print("CARGANDO:archivoComandos:" + str(self.__COMANDOS) )
             salida_ = "ok comandos"
@@ -126,7 +126,7 @@ class UtilCommand:
         print("carga comandos:" + str(src_response) )
         
         if self.__RESPONSES==None:
-            f = open(src_response, 'r')
+            f = open(src_response, 'r',encoding='utf-8')
             self.__RESPONSES = json.loads(f.read())
             print("CARGANDO:archivoComandos:" + str(src_response) )
             print("CARGANDO:archivoComandos:" + str(self.__RESPONSES) )

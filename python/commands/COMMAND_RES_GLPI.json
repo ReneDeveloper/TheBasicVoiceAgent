@@ -1,6 +1,19 @@
 {
-"key_basic_saludo": ["wena pos perrote","como has estado perron"],
-"key_chiste": ["Claro que si","Obvio pos comparito","que chiste quieres que te cuente"]
+  "key_basic_saludo": ["wena pos perrote", "como has estado perrrron"],
+  "key_chiste": [
+    "Claro que si se contar chistes o crees que soy imbécil",
+    "Obvio pos comparito, te contare uno, dime de que",
+    "que chiste quieres que te cuente"
+  ],
+  
+   "key_proyecto_listar": [ "la lista de proyectos es la siguiente:" ],
+   "key_proyecto_crear":  ["creando un proyecto"],
+   "key_proyecto_guardar":  ["guardando proyecto"],
+
+"key_proyecto_change_categoria": ["quieres que te dicte las categorias posibles","a cual categoría debería cambiarlo"],
+"key_proyecto_change_categoria_POST": ["categoría cambiada"]
+
+
 
 
 }

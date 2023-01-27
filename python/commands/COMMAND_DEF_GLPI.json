@@ -5,6 +5,21 @@
 "key_chiste": ["chiste","chistes","talla","broma"],
 "key_chiste_ciegos": ["cieguitos","ciegos","no videntes"],
 
+"key_proyectos": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],
+"key_proyectos_tirados": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],
+"key_proyecto_listar": ["nómbrame proyectos","listado de proyectos","muestrame los proyectos actuales","cuántos proyectos"],
+
+"key_proyecto_crear": ["crear un proyecto","crea un proyecto","creame un proyecto","guarda un proyecto"],
+
+"key_proyecto_guardar": ["guardar datos","guarda los cambios","guarda el proyecto","guardar proyecto"],
+"key_proyecto_categoria": ["categoria de proyecto","proyecto de la categoria"],
+"key_proyecto_web": ["proyecto web","proyecto front"],
+"key_proyecto_change_categoria": ["cambia la categoria","otra categoria"],
+"key_proyecto_consulta_categoria": ["de qué categoría","cuál categoría","cual categoria"],
+"key_proyecto_change_prioridad": ["cambia la prioridad","baja la prioridad","modifica la prioridad"],
+
+
+
 "key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
 
 "key_basic_getnombre": ["cual es tu nombre","como te llamas","como te dicen","como te llaman"],

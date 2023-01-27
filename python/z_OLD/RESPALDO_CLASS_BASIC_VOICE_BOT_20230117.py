@@ -1,9 +1,10 @@
+RESPALDO_CLASS_BASIC_VOICE_BOT.py
+
 """class_basic_voice_bot.py"""
-import time
 import random
 import nltk #RSILVA_20200305 NATURAL LANGUAGE TOOL KIT
 import speech_recognition as sr #RSILVA_20200305 RECONOCIMIENTO DE VOZ ENTRADA
-import pyttsx3 #RSILVA_20200305 PYTHON TEXT TO SPEECH
+import pyttsx3 #RSILVA_20200305 PYTHON SPEECH TEXT TO SPEECH
 
 import requests
 
@@ -55,7 +56,6 @@ class BasicVoiceBot:
 
     voice_engine = 'TTS_MS_ES-MX_SABINA_11.0'
     voice_engine_batch = 'MSTTS_V110_esES_PabloM'
-    voice_actual = voice_engine
     #'MSTTS_V110_esES_PabloM' 'MSTTS_V110_esMX_RaulMM'
     #'TTS_MS_ES-ES_HELENA_11.0'  TTS_MS_ES-MX_SABINA_11.0
 
@@ -70,13 +70,11 @@ class BasicVoiceBot:
 
         self.__name = name_
 
-
         self.engine = pyttsx3.init()
-        self.voz_change('TTS_MS_ES-MX_SABINA_11.0')
-        #self.engine.setProperty('voice', self.vozId_completo(self.voice_engine) )
+        self.engine.setProperty('voice', self.voice_engine)
 
-        #self.engine_batch = pyttsx3.init()
-        #self.engine_batch.setProperty('voice', self.vozId_completo(self.voice_engine_batch) )
+        self.engine_batch = pyttsx3.init()
+        self.engine_batch.setProperty('voice', self.voice_engine_batch)
 
     def log(self,txt_log):
         """function ____"""
@@ -165,6 +163,144 @@ class BasicVoiceBot:
 
         return interact_out
 
+
+#https://www.youtube.com/watch?v=h2Cn1w1YdpU
+
+    def old_interact(self,msg):
+        """function ____"""
+        interact_out = 'No te entiendo, me falta información'
+        mapa_comando = self.util_command.getMapaComando(msg)
+        comando='sin_comando'#ignorando
+
+        self.log('mapa_comando:' + str(mapa_comando))
+
+        if comando=='saluda':
+            msg_saludo = '' #msg_saludo
+            rnd_txt = random.choice(self._POSIBLE_SALUDO)
+            if self.__nombre_conocido!='':
+                msg_saludo = rnd_txt + ' ' + self.__nombre_conocido
+            else:
+                msg_saludo = rnd_txt + ', no sé como te llamas, por favor dime tu nombre.'
+            interact_comando_out = msg_saludo
+
+        if "key_basic_saludo" in mapa_comando.keys():
+            print("SETEANDO NOMBRE: " + msg)
+            msg_saludo = ""
+            txt_rnd = random.choice(self._POSIBLE_SALUDO)
+            if self.__nombre_conocido!="":
+                msg_saludo = txt_rnd + " " + self.__nombre_conocido
+            else:
+                msg_saludo = txt_rnd + ", no sé como te llamas, por favor dime tu nombre."
+            interact_out = msg_saludo
+
+        if "key_basic_setnombre" in mapa_comando.keys():
+            print("SETEANDO NOMBRE: " + msg)
+            msg_saludo = ""
+            predicado = "definicion de nombre"
+
+            if "juanito" in msg:
+                predicado = "Juanito Pérez"
+            #self.__nombre_conocido = predicado
+
+            if "pepe" in msg:
+                predicado = "Pepe"
+            #self.__nombre_conocido = predicado
+
+            if "rené" in msg:
+                predicado = "René"
+            #self.__nombre_conocido = predicado
+
+            if self.__nombre_conocido=="":
+                self.__nombre_conocido = predicado
+            else:
+                self.__nombre_conocido = predicado
+
+            saludo_rnd = random.choice(self._POSIBLE_SALUDO)
+            msg_saludo = f'{saludo_rnd} {predicado}, he almacenado tu nombre'
+            interact_out = msg_saludo
+
+        if 'key_logistica_busqueda' in mapa_comando.keys():
+            print('BUSCANDO PRODUCTO')
+            #msg_saludo = '
+            interact_out = 'producto no encontrado'
+
+            if msg=='dime donde estan los tubos de pvc':
+                predicado = 'tubos de pvc'
+                donde = ' en el pasillo 5, columna 5, estante C'
+                busqueda_logistica = 'quedan 485 ' + predicado + donde
+                interact_out = 'producto encontrado: ' + busqueda_logistica
+
+        if 'key_basic_ayuda' in mapa_comando.keys():
+            interact_out = 'por supuesto que puedo ayudarte, conexión a E R P realizada con éxito'
+
+        if 'key_sabes_chistes' in mapa_comando.keys():
+            interact_out = 'por supuesto que sé contar chistes, dime un tema del chiste'
+
+        if 'key_chiste_ciegos' in mapa_comando.keys():
+            interact_out = 'Van dos ciegos y le dice uno al otro:— Ojalá lloviera.'
+            interact_out += ' y el otro contesta— Ojalá yo también., pues ostia chaval.'
+
+        if 'key_chiste_foca' in mapa_comando.keys():
+            interact_out = '— ¿Qué le dijo una foca gringa su madre?, —AI loviu, mother foca.'
+            interact_out += ' Ostia Joder, jo jo jo jo jo, ese chiste está muy bueno'
+
+        if 'key_chiste_dj' in mapa_comando.keys():
+            interact_out = '— ¿Sabes por qué no se puede discutir con un dj? '
+            interact_out += '— Pues que Porque siempre están cambiando de tema,'
+            interact_out += ' jajaja ja ja ja jojojo ostias que me rio.'
+
+        if comando=='getnombre':
+            msg_saludo = 'mi nombre es ' + self.__name #random.choice(self._POSIBLE_SALUDO)
+            return msg_saludo
+
+        if comando=="despedida":
+            msg_adios = ''#msg_adios
+            rnd_txt = random.choice(self._POSIBLE_DESPEDIDA)
+            if self.__nombre_conocido!='':
+                msg_adios = rnd_txt + " " + self.__nombre_conocido
+            else:
+                msg_adios = rnd_txt + ", pero nunca me dijiste tu nombre"
+            interact_comando_out = msg_adios
+
+        if comando=="insultar":
+            msg_ins = ""#msg_insulto
+            rnd_txt = random.choice(self._POSIBLE_INSULTO)
+            if self.__nombre_conocido!="":
+                msg_ins = rnd_txt + " " + self.__nombre_conocido
+            else:
+                msg_ins = rnd_txt +", pero nunca me dijiste tu nombre"
+            interact_comando_out = msg_ins
+
+        if comando=="insultar2":
+            msg_ins = ""
+            rnd_txt = random.choice(self._POSIBLE_INSULTO_MALDITO)
+            if self.__nombre_conocido!="":
+                msg_ins=f'{rnd_txt}  {self.__nombre_conocido}'
+            else:
+                msg_ins=f'{rnd_txt} pero nunca me dijiste tu nombre'
+            interact_comando_out = msg_ins
+
+        if comando=="insultar3":
+            msg_ins = ""
+            rnd_txt = random.choice(self._POSIBLE_INSULTO_3)
+            if self.__nombre_conocido!="":
+                msg_ins = rnd_txt + " " + self.__nombre_conocido
+            else:
+                msg_ins = rnd_txt + ", pero nunca me dijiste tu nombre"
+            interact_comando_out = msg_ins
+
+#contextoColusiones = BasicContext("Contexto Colusiones Chile",
+#"C:/Users/Rene Developer/Desktop/BOTS/FOOD_BOT-MOSTRADORColusionPollos_20191207_CONTENIDO.txt")
+#salida = contextoPulga.basicResponse("que sabes de los saqueos")
+#print("salida:" + salida)
+
+        return interact_out
+
+    #def response_FIX(self,user_response):
+        """function ____"""
+    #    robo_response=self.util.string_FIX_000(user_response)
+    #    return robo_response
+
     def learn(self,txt_raw):
         """function ____"""
         cnt = len(txt_raw)
@@ -213,8 +349,8 @@ class BasicVoiceBot:
     def batch(self,src_):
         """function ____"""
         batch_out = ""
-        self.engine.say("Entrando a modo batch: mi nombre es: " + self.__name)
-        self.engine.runAndWait()
+        self.engine_batch.say("Entrando a modo batch: mi nombre es: " + self.__name)
+        self.engine_batch.runAndWait()
         txt_raw = ""
         try:
             f=open(src_,'r',errors = 'ignore')
@@ -238,12 +374,9 @@ class BasicVoiceBot:
             if self.__humanBatchVoice:
                 self.voz_change(self.voice_engine_batch) #'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('MSTTS_V110_esES_PabloM'))
-                print("VOICE")
-                print(f"VOICE:self.engine:{self.engine}")
-                #time.sleep(0.5)
-                self.engine.say("" + str(mensaje_humano))
-                #time.sleep(0.5)
-                self.engine.runAndWait()
+
+                self.engine_batch.say("" + str(mensaje_humano))
+                self.engine_batch.runAndWait()
 
             mensajeBot = self.new_interact(mensaje_humano)
 
@@ -254,11 +387,7 @@ class BasicVoiceBot:
                 self.voz_change(self.voice_engine )
                 #'TTS_MS_ES-ES_HELENA_11.0' 'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('TTS_MS_ES-ES_HELENA_11.0'))
-                print("VOICE")
-                print(f"VOICE:self.engine:{self.engine}")
-                #time.sleep(0.5)
                 self.engine.say("" + str(mensajeBot))
-                #time.sleep(0.5)
                 #engine.say("paso 2")
                 self.engine.runAndWait()
 
@@ -289,27 +418,13 @@ class BasicVoiceBot:
         id_completo = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz
         return id_completo
 
-
-
-
-
-
     def voz_change(self,id_):
         """function ____"""
-        self.log(f"CAMBIANDO VOZ:{id_}")
-        if self.voice_actual==id_:
-            self.log(f"ES LA MISMA VOZ:{id_}")
-            return
-
-        self.log(f"CAMBIANDO VOZ:{id_}")
-        self.voice_actual=id_
-
         id_completo = self.vozId_completo(id_)
         #print("setVoz(id_=" + id_ + ")-->" + "FORMATO:'"  + id_completo + "'" )
         self.engine.setProperty('voice', id_completo)
         #self.engine.say('Cambiando voz')
         #self.engine.runAndWait()
-        #time.sleep(0.5)
 
     def interact_sesion_preguntas(self,comando):
         """function ____"""
@@ -338,12 +453,11 @@ class BasicVoiceBot:
 
             #bot_response = response_JAIME(user_response)
             #sent_tokens.remove(user_response)
-            bot_response = self.new_interact_each(user_response)
+            bot_response = self.new_interact(user_response)
 
             print("----------------------------------------------------------")
             print("RESPUESTA_ROBOT:" + bot_response)
             print("----------------------------------------------------------")
-            
             self.engine.say("" + str(bot_response))
             #engine.say("paso 2")
             self.engine.runAndWait()
@@ -352,12 +466,6 @@ class BasicVoiceBot:
 
 class AsistenteGlpi(BasicVoiceBot):
     """Class ____"""
-    edicion_proyecto_id = "-1"
-    edicion_proyecto_name = "Proyecto sin nombre"
-    edicion_proyecto_categoria = "Categoria proyecto web"
-
-    proyectos = {}
-
     def __init__(self,name_,file_tag):
         """function ____"""
         BasicVoiceBot.__init__(self, name_, file_tag)
@@ -371,35 +479,18 @@ class AsistenteGlpi(BasicVoiceBot):
     def interact_03_post_main(self,mapa_comando):#recibe una instancia de instrucción
         """function interact_03_post_main"""
         interact_out = "OK"
-
-        self.voz_change(self.voice_engine)
-
-        #self.engine.setProperty('voice', self.voice_engine_batch)#voice_engine_batch
-        #self.engine.runAndWait()
-        if 'key_proyecto_crear' in mapa_comando.keys():
-            self.log(f'EJECUTANDO:key_proyecto_guardar:{interact_out:}')
-
-            #guardar proyecto
-
-            id_proyecto = 27
-            self.edicion_proyecto_id = id_proyecto
+        if 'key_proyecto_guardar' in mapa_comando.keys():
+            id_proyecto = 5
             interact_out = f'Guardando proyecto con exito:{id_proyecto}'
-
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
-            interact_out = f' qué nombre le vas a poner al proyecto {id_proyecto}'
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
-
-        if 'key_proyecto_consulta_categoria' in mapa_comando.keys():
-            self.log(f'EJECUTANDO:key_proyecto_consulta_categoria:{interact_out:}')
-            interact_out = f' El proyecto :{self.edicion_proyecto_id} es {self.edicion_proyecto_categoria}'
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
+            interact_out += ' qué nombre le vas a poner'
 
 
-
-        #self.voz_change(self.voice_engine)
+        self.log(f'interact_03_post_main:{interact_out:}')
+        #self.log(f'interact_03_post_main:{interact_out:}')
+        #self.log(f'interact_03_post_main:{interact_out:}')
+        #self.log(f'interact_03_post_main:{interact_out:}')
+        #self.log(f'interact_03_post_main:{interact_out:}')
+        
         return interact_out
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
@@ -407,7 +498,3 @@ asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
 asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
-#asistenteBot.interact_sesion_preguntas('Hola')
-
-
-

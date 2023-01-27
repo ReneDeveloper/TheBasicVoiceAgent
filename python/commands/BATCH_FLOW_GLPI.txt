@@ -1,5 +1,11 @@
 
 hola asistente, , soy un humano simulado, mi nombre es Juanito Pérez
 
+necesito crear un proyecto
 
-asistente, me puedes contar chistes?
+guardar proyecto
+de cual categoria es el proyecto
+
+quiero cargar el proyecto 27
+cambia la categoría del proyecto
+guarda los cambios
