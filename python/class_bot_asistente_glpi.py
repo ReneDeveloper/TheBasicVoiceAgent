@@ -10,8 +10,8 @@ class AsistenteGlpi(BasicVoiceBot):
 
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
-#asistenteBot.vozTesting_DISPONIBLES()
+asistenteBot.voz_testing_disponibles()
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
-#asistenteBot.setUtilComando_SRC('commands/COMMAND_DEF_GLPI.json')
-asistenteBot.load()
-asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
+#asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
+#asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
+#asistenteBot.interact_sesion_preguntas('Hola')
