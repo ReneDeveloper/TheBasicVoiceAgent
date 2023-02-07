@@ -149,6 +149,12 @@ class BasicVoiceBot:
         """function ____"""
         interact_out = 'No te entiendo, me falta información'
         mapa_comando = self.util_command.getMapaComando(msg)
+
+
+
+        
+
+
         out_each = self.new_interact_each(mapa_comando)
         if any(mapa_comando):
             #self.log('mapa_comando:' + str(mapa_comando))
@@ -238,8 +244,8 @@ class BasicVoiceBot:
             if self.__humanBatchVoice:
                 self.voz_change(self.voice_engine_batch) #'MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('MSTTS_V110_esES_PabloM'))
-                print("VOICE")
-                print(f"VOICE:self.engine:{self.engine}")
+                #print("VOICE")
+                #print(f"VOICE:self.engine:{self.engine}")
                 #time.sleep(0.5)
                 self.engine.say("" + str(mensaje_humano))
                 #time.sleep(0.5)
@@ -251,15 +257,11 @@ class BasicVoiceBot:
             print("----------------------------------------------------------")
 
             if self.__hablar:
-                self.voz_change(self.voice_engine )
-                #'TTS_MS_ES-ES_HELENA_11.0' 'MSTTS_V110_esES_PabloM'
+                self.voz_change(self.voice_engine )#'TTS_MS_ES-ES_HELENA_11.0''MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('TTS_MS_ES-ES_HELENA_11.0'))
-                print("VOICE")
-                print(f"VOICE:self.engine:{self.engine}")
-                #time.sleep(0.5)
+                #print("VOICE") print(f"VOICE:self.engine:{self.engine}")     #time.sleep(0.5)
                 self.engine.say("" + str(mensajeBot))
-                #time.sleep(0.5)
-                #engine.say("paso 2")
+                #time.sleep(0.5)                #engine.say("paso 2")
                 self.engine.runAndWait()
 
         return batch_out
@@ -289,11 +291,6 @@ class BasicVoiceBot:
         id_completo = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz
         return id_completo
 
-
-
-
-
-
     def voz_change(self,id_):
         """function ____"""
         self.log(f"CAMBIANDO VOZ:{id_}")
@@ -307,9 +304,6 @@ class BasicVoiceBot:
         id_completo = self.vozId_completo(id_)
         #print("setVoz(id_=" + id_ + ")-->" + "FORMATO:'"  + id_completo + "'" )
         self.engine.setProperty('voice', id_completo)
-        #self.engine.say('Cambiando voz')
-        #self.engine.runAndWait()
-        #time.sleep(0.5)
 
     def interact_sesion_preguntas(self,comando):
         """function ____"""
@@ -327,18 +321,17 @@ class BasicVoiceBot:
             while user_response=="sin_captura":
                 user_response = self.audio_input()
 
-            #user_response=user_response.lower()
-            #user_response = response_FIX(user_response + " ")
-            #user_response = user_response.strip()
-
             if(user_response in 'bye' or user_response == "salir"
                 or user_response == "salir de la sesión de preguntas"):
-                print("adiosito:" + user_response)
+                msg_out = "adiosito, nos vemos en otra sesión"
+                self.engine.say(msg_out)
+                #engine.say("paso 2")
+                self.engine.runAndWait()
+                print("adiosito:" + msg_out)
                 exit()
 
-            #bot_response = response_JAIME(user_response)
-            #sent_tokens.remove(user_response)
-            bot_response = self.new_interact_each(user_response)
+
+            bot_response = self.new_interact(user_response)
 
             print("----------------------------------------------------------")
             print("RESPUESTA_ROBOT:" + bot_response)
@@ -349,60 +342,3 @@ class BasicVoiceBot:
             self.engine.runAndWait()
 
         return interact_sesion_preguntas_out
-
-class AsistenteGlpi(BasicVoiceBot):
-    """Class ____"""
-    edicion_proyecto_id = "-1"
-    edicion_proyecto_name = "Proyecto sin nombre"
-    edicion_proyecto_categoria = "Categoria proyecto web"
-
-    proyectos = {}
-
-    def __init__(self,name_,file_tag):
-        """function ____"""
-        BasicVoiceBot.__init__(self, name_, file_tag)
-
-    def procesa_msg(self,aaa,bbb):
-        """function ____"""
-        self.log(f'aaa:{aaa}')
-        self.log(f'bbb:{bbb}')
-        self.log('procesa_post_msg')
-
-    def interact_03_post_main(self,mapa_comando):#recibe una instancia de instrucción
-        """function interact_03_post_main"""
-        interact_out = "OK"
-
-        self.voz_change(self.voice_engine)
-
-        #self.engine.setProperty('voice', self.voice_engine_batch)#voice_engine_batch
-        #self.engine.runAndWait()
-        if 'key_proyecto_crear' in mapa_comando.keys():
-            self.log(f'EJECUTANDO:key_proyecto_guardar:{interact_out:}')
-
-            #guardar proyecto
-
-            id_proyecto = 27
-            self.edicion_proyecto_id = id_proyecto
-            interact_out = f'Guardando proyecto con exito:{id_proyecto}'
-
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
-            interact_out = f' qué nombre le vas a poner al proyecto {id_proyecto}'
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
-
-        if 'key_proyecto_consulta_categoria' in mapa_comando.keys():
-            self.log(f'EJECUTANDO:key_proyecto_consulta_categoria:{interact_out:}')
-            interact_out = f' El proyecto :{self.edicion_proyecto_id} es {self.edicion_proyecto_categoria}'
-            self.engine.say(interact_out)
-            self.engine.runAndWait()
-
-
-
-        #self.voz_change(self.voice_engine)
-        return interact_out
-
-
-
-
-

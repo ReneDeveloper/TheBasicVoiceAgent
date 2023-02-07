@@ -12,10 +12,6 @@ class UtilCommand:
     __COMANDOS = None
     __RESPONSES = None
 
-#    _MAP_SUCURSALES_POSIBLES = {"local lyon":1,"enjoy coquimbo":1,"coquimbo":1, "viña":2,"viña del mar":2, "enjoy viña":2,  "enjoy santiago":3 ,"enjoy de los andes":3,"enjoy chiloe":4 }
-#    __MAPA_BASE = None
-#    def __init__(self,mapa_base):
-
     def __init__(self, file_tag):
         """function """
         self.log("FLUJO:UtilCommand:__init__:file_tag" + file_tag)
@@ -26,35 +22,6 @@ class UtilCommand:
         if self.__LOG_ACTIVO:
             print("LOG:UtilCommand:" + msg_)
 
-    def batch(self,src_,__MAPA_BASE):
-        """function """
-        batch_out = ""
-        self.log(  "Entrando a modo batch:  "   )
-        
-        txtRaw = ""
-        try:
-            f=open(src_,'r',errors = 'ignore')
-            txtRaw=f.read()
-            txtRaw=txtRaw.lower()# minúsculas
-        finally:
-            f.close()
-
-        for mensajeHumano in iter(txtRaw.splitlines()):
-
-            if (mensajeHumano==""):continue
-            if (mensajeHumano[0:1]=="#"):continue
-            #mensajeHumano = self.string_FIX_002(mensajeHumano)
-            print("------------------------------------------------------------------------------------------------------------------")
-            print("MENSAJE HUMANO:'" + mensajeHumano+"'")
-            print("------------------------------------------------------------------------------------------------------------------")
-            #mensajeHumano = self.util.string_FIX_002(mensajeHumano)
-
-            mapaComando = self.getMapaComando(mensajeHumano,__MAPA_BASE)
-
-            print(  "MAPA_MENSAJE:" + str(mapaComando)  )
-            print("------------------------------------------------------------------------------------------------------------------")
-
-        return batch_out
 
     def getMapaComando(self,txt_entrada):
         """function """
@@ -65,11 +32,20 @@ class UtilCommand:
         salida_=""
 
         txt = txt_entrada.lower()
-        txt = txt.replace("á","a")
-        txt = txt.replace("é","e")
-        txt = txt.replace("í","i")
-        txt = txt.replace("ó","o")
-        txt = txt.replace("ú","u")
+        print("DEBUG DEL TXT:--INICIO")
+        print(txt)
+        print("DEBUG DEL TXT----ESTO HAY")
+        print(self.__COMANDOS)
+        print("DEBUG DEL TXT----END")
+
+        
+
+
+        #txt = txt.replace("á","a")
+        #txt = txt.replace("é","e")
+        #txt = txt.replace("í","i")
+        #txt = txt.replace("ó","o")
+        #txt = txt.replace("ú","u")
 
         txt_post = "" + txt
 
@@ -162,3 +138,36 @@ class UtilCommand:
         #print (important_words )
         valClean = valClean.strip()
         return valClean
+
+
+"""
+    def batch(self,src_,__MAPA_BASE):
+
+        batch_out = ""
+        self.log(  "Entrando a modo batch:  "   )
+        
+        txtRaw = ""
+        try:
+            f=open(src_,'r',errors = 'ignore')
+            txtRaw=f.read()
+            txtRaw=txtRaw.lower()# minúsculas
+        finally:
+            f.close()
+
+        for mensajeHumano in iter(txtRaw.splitlines()):
+
+            if (mensajeHumano==""):continue
+            if (mensajeHumano[0:1]=="#"):continue
+            #mensajeHumano = self.string_FIX_002(mensajeHumano)
+            print("------------------------------------------------------------------------------------------------------------------")
+            print("MENSAJE HUMANO:'" + mensajeHumano+"'")
+            print("------------------------------------------------------------------------------------------------------------------")
+            #mensajeHumano = self.util.string_FIX_002(mensajeHumano)
+
+            mapaComando = self.getMapaComando(mensajeHumano,__MAPA_BASE)
+
+            print(  "MAPA_MENSAJE:" + str(mapaComando)  )
+            print("------------------------------------------------------------------------------------------------------------------")
+
+        return batch_out
+"""
