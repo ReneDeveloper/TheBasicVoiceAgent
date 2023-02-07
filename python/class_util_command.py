@@ -32,14 +32,11 @@ class UtilCommand:
         salida_=""
 
         txt = txt_entrada.lower()
-        print("DEBUG DEL TXT:--INICIO")
-        print(txt)
-        print("DEBUG DEL TXT----ESTO HAY")
-        print(self.__COMANDOS)
-        print("DEBUG DEL TXT----END")
-
-        
-
+        #print("DEBUG DEL TXT:--INICIO")
+        #print(txt)
+        #print("DEBUG DEL TXT----ESTO HAY")
+        #print(self.__COMANDOS)
+        #print("DEBUG DEL TXT----END")
 
         #txt = txt.replace("á","a")
         #txt = txt.replace("é","e")

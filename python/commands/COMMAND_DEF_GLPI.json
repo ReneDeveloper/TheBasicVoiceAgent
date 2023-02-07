@@ -6,8 +6,13 @@
 "key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
 "par_basic_nombre": ["apodo:y como te dicen|y cual es tu apodo","apellido:y cual es tu apellido","email:cual es tu correo electrónico"],
 
+"key_sentimiento_enojo":  ["te enojas","te puedes enojar"],
+
 "key_chiste": ["chiste","chistes","talla","broma"],
 "key_chiste_ciegos": ["cieguitos","ciegos","ciego","no videntes"],
+"key_chiste_focas": ["chiste de focas","focas","uno de focas"],
+
+
 
 "key_proyectos": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],
 "key_proyectos_tirados": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],

@@ -150,11 +150,6 @@ class BasicVoiceBot:
         interact_out = 'No te entiendo, me falta información'
         mapa_comando = self.util_command.getMapaComando(msg)
 
-
-
-        
-
-
         out_each = self.new_interact_each(mapa_comando)
         if any(mapa_comando):
             #self.log('mapa_comando:' + str(mapa_comando))
