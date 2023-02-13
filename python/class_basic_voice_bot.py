@@ -1,17 +1,30 @@
 """class_basic_voice_bot.py"""
-import time
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# -----------------------------------------------------------------------------
+# Project: Basic Voice Bot
+# Author : Rene Silva
+# Email  : rsilcas@outlook.es
+# Date   : 2023-02-07
+# -----------------------------------------------------------------------------
+#
+# Description:
+#
+# This Python script Generates a bot to understand human sentences
+# that means: you talk, and the invoke a SpeechToText script to obtain the text
+# the bot contains tables or structures to undersatand some keys of that text,
+# then the bot based on the keys stored can choose a possible response for the input text
+# the basic capabilities can be extended in a new bot class inheriting the basic voice functions
+# for example you can create a class_joke_bot like: class JokeBot(BasicVoiceBot):
+# all the bots can speak with humans and can simulate the interaction with the batch mode
+
 import random
 import nltk #RSILVA_20200305 NATURAL LANGUAGE TOOL KIT
 import speech_recognition as sr #RSILVA_20200305 RECONOCIMIENTO DE VOZ ENTRADA
 import pyttsx3 #RSILVA_20200305 PYTHON TEXT TO SPEECH
-
-import requests
-
 from class_util_string import UtilString
-#from BASIC_BOT_TRADUCE_PERIODOS_20200210 import BasicTraductor_PERIODOS
-
 from class_util_command import UtilCommand
-#from UTIL_RESPONSE_20200110 import UtilResponse
 
 class BasicVoiceBot:
     """class BasicVoiceBot"""
@@ -61,22 +74,14 @@ class BasicVoiceBot:
 
     def __init__(self,name_, file_tag):
         """function ____"""
-        #self.__init__(self)
         self.log('BasicVoiceBot:INIT:')
         self.__name = 'Sin configurar bot'
         self.util_string = UtilString()
         self.log('BasicVoiceBot:INIT:SETEANDO COMANDOS POR DEFECTO')
         self.util_command = UtilCommand(file_tag)
-
         self.__name = name_
-
-
         self.engine = pyttsx3.init()
         self.voz_change('TTS_MS_ES-MX_SABINA_11.0')
-        #self.engine.setProperty('voice', self.vozId_completo(self.voice_engine) )
-
-        #self.engine_batch = pyttsx3.init()
-        #self.engine_batch.setProperty('voice', self.vozId_completo(self.voice_engine_batch) )
 
     def log(self,txt_log):
         """function ____"""
@@ -96,12 +101,12 @@ class BasicVoiceBot:
         msg_rnd = random.choice(self._POSIBLE_DESPEDIDA)
         self.log(f'despedida:{msg_rnd}')
 
-    def set_util_comando_src(self,src_comandos):
-        """function ____"""
-        self.log("set_util_comando_src: " + src_comandos)
-        util_command = UtilCommand(src_comandos)
-        #util_command.cargaComandos(src_comandos)
-        self.__util_command = util_command
+    #def set_util_comando_src(self,src_comandos):
+    #    """function ____"""
+    #    self.log("set_util_comando_src: " + src_comandos)
+    #    util_command = UtilCommand(src_comandos)
+    #    #util_command.cargaComandos(src_comandos)
+    #    self.__util_command = util_command
 
 #    XXXXXXXX  XX    XX XXXXXXXX XXXXXXXX XXXXXXX   XXXXXX    XXXXXX XXXXXXXX
 #       XX     XXX   XX    XX    XX       XX    XX XXX  XXX  X          XX
@@ -125,25 +130,22 @@ class BasicVoiceBot:
         """function ____"""
         interact_out = "OK"
         self.log(f'interact_01_pre__main:{interact_out}')
-        
+        self.log(f'mapa_comando:{mapa_comando}')
         return interact_out
 
     def interact_02_main_main(self,mapa_comando):#recibe una instancia de instrucción
         """function interact_02_main_main"""
         interact_out = "OK"
         self.log(f'interact_02_main_main:{interact_out:}')
-        
+        self.log(f'mapa_comando:{mapa_comando}')
         return interact_out
+
     def interact_03_post_main(self,mapa_comando):#recibe una instancia de instrucción
         """function interact_03_post_main"""
         interact_out = "OK"
         self.log(f'interact_03_post_main:{interact_out:}')
-        
+        self.log(f'mapa_comando:{mapa_comando}')
         return interact_out
-
-
-
-
 
     def new_interact(self,msg):
         """function ____"""
@@ -151,15 +153,16 @@ class BasicVoiceBot:
         mapa_comando = self.util_command.getMapaComando(msg)
 
         out_each = self.new_interact_each(mapa_comando)
+        out_each = out_each.lower()
         if any(mapa_comando):
             #self.log('mapa_comando:' + str(mapa_comando))
             for key_comando in mapa_comando:
                 #print ("------------------------------------------")
                 self.log("key_comando:" + key_comando)
                 if key_comando[0:4]=="key_":
-                    print("es una key de comando y sus posibles respuestas estarán en VECTOR_[key]'")
+                    self.log("es una key de comando:posibles respuestas:VECTOR_[key]'")
                     auto_reponses = mapa_comando[ 'VECTOR_'+key_comando ]
-                    if auto_reponses!=None and any(auto_reponses):#si existen responses
+                    if auto_reponses is not None and any(auto_reponses):#si existen responses
                         #self.log("seleccionar una respuesta aleatoria")
                         auto_response_rnd = random.choice(auto_reponses)
                         interact_out = auto_response_rnd
@@ -177,26 +180,26 @@ class BasicVoiceBot:
 
     def eat_txt_file(self,txt_src):
         """function ____"""
-        f=open(txt_src,'r',errors = 'ignore')
-        txt_raw=f.read()
+        file_txt=open(txt_src,'r',errors = 'ignore',encoding='utf-8')
+        txt_raw=file_txt.read()
         txt_raw=txt_raw.lower()# minúsculas
         self.learn(txt_raw)
 
     def audio_input(self):
         """function ____"""
         robo_response_audio_txtfixed=""
-        r = sr.Recognizer()
+        recognizer = sr.Recognizer()
         with sr.Microphone() as source:
             #print("Please wait. Calibrating microphone...")
             # listen for 1 second and create the ambient noise energy level
-            r.adjust_for_ambient_noise(source, duration=1)
+            recognizer.adjust_for_ambient_noise(source, duration=1)
             print("Dime algo por favor")
-            audio = r.listen(source,phrase_time_limit=10)
+            audio = recognizer.listen(source,phrase_time_limit=10)
 
             # recognize speech using Sphinx/Google
             try:
-                #response = r.recognize_sphinx(audio)
-                response = r.recognize_google(audio, language="es-ES")
+                #response = recognizer.recognize_sphinx(audio, language="es-ES")
+                response = recognizer.recognize_google(audio, language="es-ES")
                 response = response.lower()
                 robo_response_audio_txtfixed = response
                 #response = audio_TXTFIX(response)
@@ -206,8 +209,8 @@ class BasicVoiceBot:
             except sr.UnknownValueError:
                 print("No puedo entenderte, estás ahí")
                 robo_response_audio_txtfixed = "sin_captura"
-            except sr.RequestError as e:
-                print(f"Ocurrió un error_ {e}")
+            except sr.RequestError as e_request:
+                print(f"Ocurrió un error_ {e_request}")
 
         return robo_response_audio_txtfixed
 
@@ -252,7 +255,8 @@ class BasicVoiceBot:
             print("----------------------------------------------------------")
 
             if self.__hablar:
-                self.voz_change(self.voice_engine )#'TTS_MS_ES-ES_HELENA_11.0''MSTTS_V110_esES_PabloM'
+                self.voz_change(self.voice_engine )
+                #'TTS_MS_ES-ES_HELENA_11.0''MSTTS_V110_esES_PabloM'
                 #self.engine.setProperty('voice',self.vozId_('TTS_MS_ES-ES_HELENA_11.0'))
                 #print("VOICE") print(f"VOICE:self.engine:{self.engine}")     #time.sleep(0.5)
                 self.engine.say("" + str(mensajeBot))
@@ -267,21 +271,21 @@ class BasicVoiceBot:
         #print(self.engine)
         for voice in voices:
             #print(voice, voice.id)
-            print("FORMATO:'"  + str(self.vozId_minimo(voice.id)) + "'" )
+            print("FORMATO:'"  + str(self.voz_id_minimo(voice.id)) + "'" )
             self.engine.setProperty('voice', voice.id)
             #engine.say("FORMATO: " + str(voice.id) + "hola mundo")
             self.engine.say('Cargando deita')
             self.engine.runAndWait()
             #engine.stop()
 
-    def vozId_minimo(self,id_completo):
+    def voz_id_minimo(self,id_completo):
         """function ____"""
         id_voz=""+id_completo
         windows_reg = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\"
         id_voz = id_voz.replace(windows_reg, "")
         return id_voz
 
-    def vozId_completo(self,id_voz):
+    def voz_id_completo(self,id_voz):
         """function ____"""
         id_completo = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\" + id_voz
         return id_completo
@@ -296,7 +300,7 @@ class BasicVoiceBot:
         self.log(f"CAMBIANDO VOZ:{id_}")
         self.voice_actual=id_
 
-        id_completo = self.vozId_completo(id_)
+        id_completo = self.voz_id_completo(id_)
         #print("setVoz(id_=" + id_ + ")-->" + "FORMATO:'"  + id_completo + "'" )
         self.engine.setProperty('voice', id_completo)
 
@@ -323,7 +327,7 @@ class BasicVoiceBot:
                 #engine.say("paso 2")
                 self.engine.runAndWait()
                 print("adiosito:" + msg_out)
-                exit()
+                sys.exit()
 
 
             bot_response = self.new_interact(user_response)
@@ -331,7 +335,7 @@ class BasicVoiceBot:
             print("----------------------------------------------------------")
             print("RESPUESTA_ROBOT:" + bot_response)
             print("----------------------------------------------------------")
-            
+
             self.engine.say("" + str(bot_response))
             #engine.say("paso 2")
             self.engine.runAndWait()

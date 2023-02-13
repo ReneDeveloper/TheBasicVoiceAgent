@@ -1,6 +1,5 @@
 from class_basic_voice_bot import BasicVoiceBot
 
-
 class AsistenteGlpi(BasicVoiceBot):
     """Class ____"""
     edicion_proyecto_id = "-1"
@@ -18,6 +17,30 @@ class AsistenteGlpi(BasicVoiceBot):
         self.log(f'aaa:{aaa}')
         self.log(f'bbb:{bbb}')
         self.log('procesa_post_msg')
+
+
+
+
+
+    def interact_01_pre__main(self,mapa_comando):#recibe una instancia de instrucción
+        """function interact_03_post_main"""
+        interact_out = "OK"
+
+        self.voz_change(self.voice_engine)
+
+        #self.engine.setProperty('voice', self.voice_engine_batch)#voice_engine_batch
+        #self.engine.runAndWait()
+        if 'key_idea_insert' in mapa_comando.keys():
+            self.log(f'EJECUTANDO:key_idea_insert:{interact_out}')
+
+            #guardar proyecto
+            interact_out = f'acá debo guardar una idea'
+
+            self.engine.say(interact_out)
+            self.engine.runAndWait()
+
+        #self.voz_change(self.voice_engine)
+        return interact_out
 
     def interact_03_post_main(self,mapa_comando):#recibe una instancia de instrucción
         """function interact_03_post_main"""
@@ -48,9 +71,7 @@ class AsistenteGlpi(BasicVoiceBot):
             self.engine.say(interact_out)
             self.engine.runAndWait()
 
-        #self.voz_change(self.voice_engine)
         return interact_out
-
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 #asistenteBot.voz_testing_disponibles()
