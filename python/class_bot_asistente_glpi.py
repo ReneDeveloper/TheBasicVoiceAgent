@@ -28,6 +28,19 @@ class AsistenteGlpi(BasicVoiceBot):
 
         self.voz_change(self.voice_engine)
 
+
+        if 'key_proyecto_crear' in mapa_comando.keys():
+            self.log(f'EJECUTANDO:key_proyecto_guardar:{interact_out:}')
+
+            #guardar proyecto
+
+            interact_out = f'qué nombre le vas a poner al proyecto'
+            self.engine.say(interact_out)
+            self.engine.runAndWait()
+
+
+
+
         #self.engine.setProperty('voice', self.voice_engine_batch)#voice_engine_batch
         #self.engine.runAndWait()
         if 'key_idea_insert' in mapa_comando.keys():

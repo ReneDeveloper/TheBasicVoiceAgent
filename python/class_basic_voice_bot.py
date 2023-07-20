@@ -327,7 +327,8 @@ class BasicVoiceBot:
                 #engine.say("paso 2")
                 self.engine.runAndWait()
                 print("adiosito:" + msg_out)
-                sys.exit()
+                #sys.exit()
+                
 
 
             bot_response = self.new_interact(user_response)
