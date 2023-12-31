@@ -3,7 +3,7 @@
 "key_basic_como_estas": ["como estás"],
 "key_basic_setnombre": ["me llamo","mi nombre es","me dicen","el cura me puso"],
 "key_basic_getnombre": ["cómo te llamas","cuál es tu nombre","cómo te nombró tu hacedor"],
-"key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
+"key_basic_ayuda": ["ayúdame","ayudame","me puedes ayudar","me puedes dar una manito"],
 "par_basic_nombre": ["apodo:y como te dicen|y cual es tu apodo","apellido:y cual es tu apellido","email:cual es tu correo electrónico"],
 
 "key_chiste": ["chiste","chistes","talla","broma"],

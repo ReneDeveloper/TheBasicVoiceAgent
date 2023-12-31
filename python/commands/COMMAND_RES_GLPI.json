@@ -6,12 +6,10 @@
   "key_basic_saludo": ["wena pos perrote", "como has estado perrrron","hola, como estás?"],
   "key_chiste": [
     "Claro que si se contar chistes o crees que soy imbécil",
-    "Obvio pos comparito, te contare uno, dime de que",
+    "Obvio pos comparito, te contaré uno, dime de qué",
     "que chiste quieres que te cuente"
   ],
   "key_basic_getnombre":["me llamo asistente GLPI y estoy en desarrollo"],
-
-
 
 
    "key_proyecto_listar": [ "la lista de proyectos es la siguiente:" ],
@@ -19,9 +17,13 @@
    "key_proyecto_guardar":  ["guardando proyecto"],
 
 "key_proyecto_change_categoria": ["quieres que te dicte las categorias posibles","a cual categoría debería cambiarlo"],
-"key_proyecto_change_categoria_POST": ["categoría cambiada"]
+"key_proyecto_change_categoria_POST": ["categoría cambiada"],
 
+"key_chiste_ciegos": [
+  "un ciego le dijo a otro, ojalá lloviera, y el otro cieguito le dijo, ojalá yo también, jojojo ostias, joder",
+  "chiste 2 de ciegos"
 
+]
 
 
 }

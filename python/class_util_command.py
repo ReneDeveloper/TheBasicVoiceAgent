@@ -87,8 +87,19 @@ class UtilCommand:
 
     def carga_comandos(self,file_tag):
         """function """
-        src_comandos = f'commands/COMMAND_DEF_{file_tag}.json'
+        # Obtener la ruta del script actual
+        script_path = os.path.abspath(__file__)
 
+        # Obtener el directorio que contiene el script
+        script_directory = os.path.dirname(script_path)
+        src_comandos = f'{script_directory}/commands/COMMAND_DEF_{file_tag}.json'
+
+
+
+
+
+        print(f"La ruta completa del script es: {script_path}")
+        print(f"El directorio del script es: {script_directory}")
         print("carga comandos:" + str(src_comandos) )
         salida_ = ""
         if self.__COMANDOS==None:
@@ -98,7 +109,7 @@ class UtilCommand:
             print("CARGANDO:archivoComandos:" + str(self.__COMANDOS) )
             salida_ = "ok comandos"
 
-        src_response = f'commands/COMMAND_RES_{file_tag}.json' #f'commands/COMMAND_DEF_{file_tag}_RESPONSE.json'
+        src_response = f'{script_directory}/commands/COMMAND_RES_{file_tag}.json' #f'commands/COMMAND_DEF_{file_tag}_RESPONSE.json'
         print("carga comandos:" + str(src_response) )
         
         if self.__RESPONSES==None:

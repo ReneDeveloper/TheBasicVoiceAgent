@@ -1,5 +1,5 @@
+import os
 from class_basic_voice_bot import BasicVoiceBot
-
 
 class AsistenteGlpi(BasicVoiceBot):
     """Class ____"""
@@ -51,12 +51,12 @@ class AsistenteGlpi(BasicVoiceBot):
         #self.voz_change(self.voice_engine)
         return interact_out
 
-
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 #asistenteBot.voz_testing_disponibles()
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
-asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
+file_ = os.path.dirname(os.path.abspath(__file__)) +"/commands/BATCH_FLOW_GLPI.txt"
+print(file_)
+asistenteBot.batch(file_)
+
 #asistenteBot.interact_sesion_preguntas('Hola')
-
-

@@ -119,12 +119,12 @@ def main():
 
 if __name__ == "__main__":
     #main()
-    #_replace_template("35","8235","8335")
+    _replace_template("40","8240","8340")
     #_replace_template("36","8236","8336")
     #_replace_template("37","8237","8337")
     #_replace_template("38","8238","8338")
     #_replace_template("39","8239","8339")
-    client, log_path = _set_up_environment()
-    _run_docker_compose(f"{path_yaml_template}TEMPLATE_DOCKER_GLPI.yaml",log_path)
+    #client, log_path = _set_up_environment()
+    #_run_docker_compose(f"{path_yaml_template}TEMPLATE_DOCKER_GLPI.yaml",log_path)
 
     #path_yaml_project_
