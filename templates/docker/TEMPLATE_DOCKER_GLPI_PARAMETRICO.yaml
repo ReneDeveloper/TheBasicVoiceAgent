@@ -1,0 +1,27 @@
+version: "3.2"
+
+services:
+
+  mysql___PROJECT_NAME__:
+    image: mariadb
+    container_name: mysql___PROJECT_NAME__
+    hostname: mysql___PROJECT_NAME__
+    ports:
+      - "__MYSQL_PORT__:3306"
+    volumes:
+      - ./mysql___PROJECT_NAME__:/var/lib/mysql
+    env_file:
+      - ./mysql.env
+    restart: unless-stopped
+
+  glpi___PROJECT_NAME__:
+    image: diouxx/glpi
+    container_name : glpi___PROJECT_NAME__
+    hostname: glpi___PROJECT_NAME__
+    ports:
+      - "__HTTP_PORT__:80"
+    volumes:
+      - ./glpi___PROJECT_NAME__/:/var/www/html/glpi
+    environment:
+      - TIMEZONE=Europe/Madrid
+    restart: unless-stopped

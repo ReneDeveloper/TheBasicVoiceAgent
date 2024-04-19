@@ -1,0 +1,54 @@
+{
+"key_basic_saludo": ["hola"],
+"key_basic_como_estas": ["como estás"],
+"key_basic_setnombre": ["me llamo","mi nombre es","me dicen","el cura me puso"],
+"key_basic_getnombre": ["cómo te llamas","cuál es tu nombre","cómo te nombró tu hacedor"],
+"key_basic_ayuda": ["me puedes ayudar","me puedes dar una manito"],
+"par_basic_nombre": ["apodo:y como te dicen|y cual es tu apodo","apellido:y cual es tu apellido","email:cual es tu correo electrónico"],
+
+"key_sentimiento_enojo":  ["te enojas","te puedes enojar"],
+
+"key_chiste": ["chiste","chistes","talla","broma"],
+"key_chiste_ciegos": ["cieguitos","ciegos","ciego","no videntes"],
+"key_chiste_focas": ["chiste de focas","focas","uno de focas"],
+"key_cocina_mañana": ["qué cocinar","qué puedo cocinar mañana","qué cocinar mañana","qué cocino mañana","qué hago mañana para comer","qué vamos a comer"],
+
+
+"key_proyectos": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],
+"key_proyectos_tirados": ["administrar proyectos","administrar ideas","inicia proyecto  ","quiero un proyecto front"],
+"key_proyecto_listar": ["nómbrame proyectos","listado de proyectos","muestrame los proyectos actuales","cuántos proyectos"],
+
+"key_proyecto_crear": ["crear un proyecto","crea un proyecto","creame un proyecto","guarda un proyecto"],
+
+"key_proyecto_guardar": ["guardar datos","guarda los cambios","guarda el proyecto","guardar proyecto"],
+"key_proyecto_categoria": ["categoria de proyecto","proyecto de la categoria"],
+"key_proyecto_web": ["proyecto web","proyecto front"],
+"key_proyecto_change_categoria": ["cambia la categoria","otra categoria"],
+"key_proyecto_consulta_categoria": ["de qué categoría","cuál categoría","cual categoria"],
+"key_proyecto_change_prioridad": ["cambia la prioridad","baja la prioridad","modifica la prioridad"],
+
+
+
+
+"key_type_project": ["nombrame los tipos de proyectos"],
+
+"key_type_idea": ["nombrame los tipos de ideas","tipos de idea","tipos de ideas"],
+
+
+
+"key_idea_insert": ["nueva idea","crear idea","tengo una idea"],
+"key_idea_select": ["busca idea","selecciona idea","seleccionar idea"],
+"key_idea_list": ["listar ideas","mostrar ideas","muestrame las ideas"],
+"key_idea_count": ["contar ideas","cuantas ideas"],
+
+"map_SUCURSALES_POSIBLES" : {"local lyon":1,"enjoy coquimbo":1,"coquimbo":1, "viña":2,"viña del mar":2, "enjoy viña":2,  "enjoy santiago":3 ,"enjoy de los andes":3,"enjoy chiloe":4,"paris alto las condes":502, "paris maipu":503,  "local 503":503 ,"local 502":502 },
+
+"key_proyecto_web": ["crear un proyecto web","crea proyecto web","inicia proyecto web","quiero un front"],
+
+"key_proyecto_backend": ["crear un proyecto backend","crea un proyecto backend"],
+
+"key_framework_angular": ["angular"],
+
+"key_logistica_busqueda": ["donde esta","cuanto queda","cual es la existencia","que cantidad hay","quedan"]
+
+}
