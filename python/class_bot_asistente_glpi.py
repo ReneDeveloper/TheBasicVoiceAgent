@@ -52,7 +52,7 @@ class AsistenteGlpi(BasicVoiceBot):
         return interact_out
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
-#asistenteBot.voz_testing_disponibles()
+asistenteBot.voz_testing_disponibles()
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
 file_ = os.path.dirname(os.path.abspath(__file__)) +"/commands/BATCH_FLOW_GLPI.txt"
