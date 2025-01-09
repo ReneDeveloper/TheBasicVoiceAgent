@@ -11,17 +11,34 @@
   ],
   "key_basic_getnombre":["me llamo asistente GLPI y estoy en desarrollo"],
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4800fe973c7cb72d0993c22a88d19246887978ed
    "key_proyecto_listar": [ "la lista de proyectos es la siguiente:" ],
+
+   "key_type_idea": [ "ideas físicas, ideas lógicas" ],
+      "key_cocina_mañana": [ "lentejas","pollito","pollo con puré","arroz con huevo","papas fritas","garbanzos",
+        "porotos con riendas",
+        "René rájate con un asao, no seas cagao" 
+    ],
+
+
    "key_proyecto_crear":  ["creando un proyecto"],
    "key_proyecto_guardar":  ["guardando proyecto"],
+   "key_sentimiento_enojo": ["no me puedo enojar pedazo de bosta","me programaron para no enojarme","soy simpático, estoy para ayudarte"],
 
 "key_proyecto_change_categoria": ["quieres que te dicte las categorias posibles","a cual categoría debería cambiarlo"],
 "key_proyecto_change_categoria_POST": ["categoría cambiada"],
+<<<<<<< HEAD
 
 "key_chiste_ciegos": [
   "un ciego le dijo a otro, ojalá lloviera, y el otro cieguito le dijo, ojalá yo también, jojojo ostias, joder",
   "chiste 2 de ciegos"
+=======
+"key_chiste_ciegos": ["Un ciego le dijo a otro, ojalá lloviera y el otro cieguito le dijo, ojalá yo también"],
+"key_chiste_focas": ["sabes qué le dijo una foca a su mamá?, le dijo, ai loviu  Moder Foca"]
+>>>>>>> 4800fe973c7cb72d0993c22a88d19246887978ed
 
 ]
 

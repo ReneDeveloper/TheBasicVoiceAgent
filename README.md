@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+# TheHackettAgent
+TheHackettAgent
+
+#URLS
+=======
 # the_basic_voice_bot
 ---------------------------------------------------------------------------
 
@@ -29,4 +35,5 @@ asistenteBot.load()
 asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
 
 ---------------------------------------------------------------------------
+>>>>>>> baeaa6fcf324e9223b2b6349e7e6c4558a2ee6c1
 

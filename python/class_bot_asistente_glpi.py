@@ -19,6 +19,43 @@ class AsistenteGlpi(BasicVoiceBot):
         self.log(f'bbb:{bbb}')
         self.log('procesa_post_msg')
 
+
+
+
+
+    def interact_01_pre__main(self,mapa_comando):#recibe una instancia de instrucción
+        """function interact_03_post_main"""
+        interact_out = "OK"
+
+        self.voz_change(self.voice_engine)
+
+
+        if 'key_proyecto_crear' in mapa_comando.keys():
+            self.log(f'EJECUTANDO:key_proyecto_guardar:{interact_out:}')
+
+            #guardar proyecto
+
+            interact_out = f'qué nombre le vas a poner al proyecto'
+            self.engine.say(interact_out)
+            self.engine.runAndWait()
+
+
+
+
+        #self.engine.setProperty('voice', self.voice_engine_batch)#voice_engine_batch
+        #self.engine.runAndWait()
+        if 'key_idea_insert' in mapa_comando.keys():
+            self.log(f'EJECUTANDO:key_idea_insert:{interact_out}')
+
+            #guardar proyecto
+            interact_out = f'acá debo guardar una idea'
+
+            self.engine.say(interact_out)
+            self.engine.runAndWait()
+
+        #self.voz_change(self.voice_engine)
+        return interact_out
+
     def interact_03_post_main(self,mapa_comando):#recibe una instancia de instrucción
         """function interact_03_post_main"""
         interact_out = "OK"
@@ -48,15 +85,21 @@ class AsistenteGlpi(BasicVoiceBot):
             self.engine.say(interact_out)
             self.engine.runAndWait()
 
-        #self.voz_change(self.voice_engine)
         return interact_out
 
 asistenteBot = AsistenteGlpi("Asistente GLPI","GLPI")
 asistenteBot.voz_testing_disponibles()
 #asistenteBot.voz_change('MSTTS_V110_esMX_RaulMM')
 #asistenteBot.set_util_comando_src('commands/COMMAND_DEF_GLPI.json')
+<<<<<<< HEAD
 file_ = os.path.dirname(os.path.abspath(__file__)) +"/commands/BATCH_FLOW_GLPI.txt"
 print(file_)
 asistenteBot.batch(file_)
 
 #asistenteBot.interact_sesion_preguntas('Hola')
+=======
+#asistenteBot.batch("commands/BATCH_FLOW_GLPI.txt")
+asistenteBot.interact_sesion_preguntas('Hola')
+
+
+>>>>>>> 4800fe973c7cb72d0993c22a88d19246887978ed
