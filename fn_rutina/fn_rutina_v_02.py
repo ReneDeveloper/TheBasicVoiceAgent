@@ -1,4 +1,4 @@
-#fn_rutina_v_01.py
+#fn_rutina_v_02.py
 
 import pyttsx3
 from sqlalchemy import create_engine, Column, Integer, String
@@ -20,7 +20,6 @@ class BasicVoiceBot:
     def __init__(self):
         self.engine = pyttsx3.init()
         self.recognizer = sr.Recognizer()
-        self.microphone = sr.Microphone()
 
     def hablar(self, mensaje):
         print(mensaje)
@@ -28,7 +27,7 @@ class BasicVoiceBot:
         self.engine.runAndWait()
 
     def escuchar(self):
-        with self.microphone as source:
+        with sr.Microphone() as source:  # Crear una nueva instancia de micrófono en cada llamada
             self.hablar("Estoy escuchando...")
             try:
                 self.recognizer.adjust_for_ambient_noise(source)
@@ -64,18 +63,15 @@ class GestorRutinas:
         index = 1
 
         while True:
-            self.bot.hablar(f"Dime el paso número {index}., para salir di salir")
+            self.bot.hablar(f"Dime el paso número {index}.")
             paso = self.bot.escuchar()
-
+            pasos[index] = paso
+            index += 1
 
             #self.bot.hablar("¿Está lista la rutina? Responde sí o no.")
             #lista = self.bot.escuchar().strip().lower()
-            if lista in ["salir", "exit"]:
+            if paso in ["salir", "terminar", "listo", "está listo"]:
                 break
-            pasos[index] = paso
-
-            index += 1
-
 
         # Guardar la rutina en la base de datos
         nueva_rutina = Rutina(
@@ -89,12 +85,11 @@ class GestorRutinas:
 
     def menu_principal(self):
         while True:
-            self.bot.hablar("Bienvenido al creador de rutinas.")
-            self.bot.hablar("¿Qué deseas hacer? Para crear una rutina di crear, para salir di abortar o salir")
+            self.bot.hablar("¿Qué deseas hacer? Crear una rutina o salir.")
             opcion = self.bot.escuchar().strip().lower()
             if opcion == "crear":
                 self.crear_rutina()
-            elif opcion == "salir":
+            elif opcion in ["salir", "terminar", "listo", "está listo"]:
                 self.bot.hablar("Adiós. Nos vemos pronto.")
                 break
             else:
@@ -103,4 +98,3 @@ class GestorRutinas:
 if __name__ == "__main__":
     gestor = GestorRutinas()
     gestor.menu_principal()
-
